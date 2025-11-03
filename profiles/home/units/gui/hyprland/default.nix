@@ -44,6 +44,12 @@
   };
 
   # Screen color without affecting screenshot/screenrecording SW
+  # One of the two following entries (units or restart) makes this work now. There is a race condition that makes the wlsunset start before the wayland is really up
+  systemd.user.services.wlsunset.Unit.After = [
+    "hyprland-session.target"
+    "hyprland.service"
+  ];
+  systemd.user.services.wlsunset.Service.Restart = "on-failure";
   services.wlsunset = {
     enable = true;
     temperature.day = 4001;
