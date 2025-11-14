@@ -181,3 +181,13 @@ nixos-enter -c 'passwd <mynewuser>'
 ```
 
 Restart the machine and you're done :) Happy modding!
+
+# libvirt EFI shit missing on random Tuesday
+
+If this happens it's probably because you've updated nixos and the ovmf directory, WHICH IS HARDCODED, changed. Ok.
+
+Go to your /nix/store and fd for `ovmf-9.2.4` or whichever version is currently there, I guess just search for `ovmf-`
+
+Once you find it copy the path of the directory.
+
+Then go to the libvirt, `enable XML editing`, click on the `OVERVIEW` and `XML` view. Find there you can see an absolute nix path to the aformentioned ovmf. Replace it on two places and click `APPLY`. Done.
