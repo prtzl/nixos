@@ -1,6 +1,4 @@
-# NixOS Generator TET or Pillow
-
-Yesh, a spelling misstake. Tells a lot about this project.
+# NixOS configuration or Pillow
 
 Started as an attempt in "how hard could this be".
 I basically started copying (some functions in lib yes) the approach from [Trilby](https://github.com/ners/trilby) project by @ners.
