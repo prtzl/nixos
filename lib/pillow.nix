@@ -48,31 +48,6 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.disko.nixosModules.default
           inputs.nix-monitored.nixosModules.default
-          (
-            { ... }:
-            {
-              system.stateVersion = version;
-
-              nixpkgs.overlays = [
-                (final: prev: {
-                  pkgs-unfree = import inputs.nixpkgs {
-                    inherit system;
-                    config.allowUnfree = true;
-                  };
-                  pkgs-unstable = import inputs.nixpkgs-unstable {
-                    inherit system;
-                    config.allowUnfree = true;
-                  };
-                })
-              ];
-
-              # Create group where all members (privileged) have access to /etc/nixos where the config SHOULD be placed
-              users.groups.nixos-editors = { };
-              systemd.tmpfiles.rules = [
-                "d /etc/nixos 0770 root nixos-editors -"
-              ];
-            }
-          )
         ]
         ++ (lib.optionals pillow.useDefaults [
           inputs.nvimnix.nixosModules.default
@@ -80,7 +55,12 @@
         ]);
 
       specialArgs = specialArgs // {
-        inherit pillow inputs;
+        inherit
+          pillow
+          inputs
+          version
+          system
+          ;
       };
     };
 
@@ -100,14 +80,6 @@
     let
       homeImports =
         imports
-        ++ [
-          (
-            { ... }:
-            {
-              home.stateVersion = version;
-            }
-          )
-        ]
         ++ (lib.optionals pillow.useDefaults [
           inputs.nvimnix.homeManagerModules.default
         ]);
@@ -126,6 +98,7 @@
     {
       config = {
         home-manager = {
+          backupFileExtension = "backup";
           useGlobalPkgs = true;
           useUserPackages = true;
 
@@ -134,6 +107,7 @@
           };
 
           extraSpecialArgs = {
+            inherit version;
             pillow = pillow // {
               inherit personal;
             };

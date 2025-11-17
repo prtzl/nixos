@@ -3,6 +3,8 @@
   lib,
   pillow,
   pkgs,
+  system,
+  version,
   ...
 }:
 
@@ -25,6 +27,28 @@
       pipewire
       udev
     ];
+
+  system.stateVersion = version;
+  nixpkgs = {
+    hostPlatform = "${pillow.hostPlatform}";
+    overlays = [
+      (final: prev: {
+        pkgs-unfree = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      })
+    ];
+  };
+  # Create group where all members (privileged) have access to /etc/nixos where the config SHOULD be placed
+  users.groups.nixos-editors = { };
+  systemd.tmpfiles.rules = [
+    "d /etc/nixos 0770 root nixos-editors -"
+  ];
 
   environment = {
     shells = with pkgs; [
@@ -72,8 +96,6 @@
     zsh.enable = true;
     nvimnix.enable = true; # my nvim, always use
   };
-
-  nixpkgs.hostPlatform = "${pillow.hostPlatform}";
 
   # Some stuff that can change based on system, so use mkDefault
   boot =
@@ -146,8 +168,6 @@
     '';
   };
 
-  home-manager.backupFileExtension = "backup";
-
   systemd.network.wait-online.extraArgs = map (
     interface: "--interface=${interface}"
   ) pillow.host.interfaces;
@@ -168,9 +188,9 @@
     fwupd.enable = pillow.onHardware;
     geoclue2.enable = true; # required for localtimed (fails if not found)
     localtimed.enable = true; # time and datre control (otherwise I'm off :O
-    printing.enable = pillow.onHardware;
-    udisks2.enable = true; # daemon for mounting storage devices (usbs and such)
-    usbmuxd.enable = pillow.onHardware;
+    printing.enable = pillow.onHardware; # printing drivers
+    udisks2.enable = pillow.onHardware; # daemon for mounting storage devices (usbs and such)
+    usbmuxd.enable = pillow.onHardware; # usb info
   };
 
   location.provider = "geoclue2"; # required for geoclue2 service, which ...
