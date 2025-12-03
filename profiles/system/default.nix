@@ -79,6 +79,7 @@
         jq # json processor
         parted # partitions
         ripgrep # modern grep
+        vim # backup, always nice
         xh
       ]
       ++ lib.optionals (pillow.onHardware) [
