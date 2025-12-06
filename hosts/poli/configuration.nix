@@ -41,11 +41,7 @@ in
   };
 
   programs = {
-    obs-studio = {
-      enable = true;
-      # Also installs v4l2loopback kernel module if needed (otherwise home config should be fine)
-      enableVirtualCamera = true;
-    };
+    obs-studio.enable = true;
     wireshark.enable = true;
   };
 }
