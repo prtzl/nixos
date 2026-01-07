@@ -38,6 +38,11 @@ in
 
   hardware = {
     openrazer.enable = true;
+    graphics.enable = true;
+    graphics.extraPackages = with pkgs; [
+      vpl-gpu-rt
+      intel-vaapi-driver
+    ];
   };
 
   programs = {
