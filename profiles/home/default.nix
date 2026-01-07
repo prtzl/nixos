@@ -26,7 +26,7 @@
     ];
 
   home.stateVersion = version;
-  programs.nvimnix.enable = true; # my nvim always use
+  # programs.nvimnix.enable = true; # my nvim always use
 
   home.packages =
     with pkgs;

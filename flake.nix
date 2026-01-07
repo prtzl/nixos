@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvimnix.url = "github:prtzl/nvimnix";
@@ -23,7 +23,7 @@
   outputs =
     inputs@{ flake-parts, disko, ... }:
     let
-      version = "25.05";
+      version = "25.11";
       lib = import ./lib { inherit inputs version; };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {

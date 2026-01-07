@@ -6,9 +6,10 @@
   imports = [ ../../profiles/home ];
 
   programs.git = {
-    userName = "prtzl";
-    userEmail = "matej.blagsic@protonmail.com";
-    extraConfig = {
+    enable = true;
+    settings = {
+      user.name = "prtzl";
+      user.email = "matej.blagsic@protonmail.com";
       core = {
         init.defaultBranch = "master";
       };

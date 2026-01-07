@@ -4,11 +4,11 @@
 }:
 
 {
+  programs.difftastic.enable = true;
   programs.git = {
     enable = true;
     lfs.enable = true;
-    difftastic.enable = true;
-    extraConfig = {
+    settings = {
       core.init.defaultBranch = lib.mkDefault "master";
       log.date = lib.mkDefault "iso";
       # idea is that dir is owned by root but

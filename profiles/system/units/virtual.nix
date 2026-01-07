@@ -12,14 +12,6 @@
       onBoot = "ignore";
       onShutdown = "shutdown";
       qemu = {
-        ovmf = lib.mkMerge [
-          {
-            enable = true;
-          }
-          (lib.optionalAttrs (pillow.hostPlatform == "x86_64") {
-            packages = [ pkgs.OVMFFull.fd ];
-          })
-        ];
         runAsRoot = false;
       };
     };

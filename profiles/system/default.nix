@@ -3,7 +3,6 @@
   lib,
   pillow,
   pkgs,
-  system,
   version,
   ...
 }:
@@ -34,11 +33,13 @@
     overlays = [
       (final: prev: {
         pkgs-unfree = import inputs.nixpkgs {
-          inherit system;
+          localSystem = final.stdenv.buildPlatform;
+          hostPlatform = final.stdenv.hostPlatform;
           config.allowUnfree = true;
         };
         pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit system;
+          localSystem = final.stdenv.buildPlatform;
+          hostPlatform = final.stdenv.hostPlatform;
           config.allowUnfree = true;
         };
       })
@@ -215,8 +216,7 @@
       fira-mono
       nerd-fonts.fira-code
       noto-fonts
-      noto-fonts-emoji
-      noto-fonts-extra
+      noto-fonts-color-emoji
     ];
   };
 

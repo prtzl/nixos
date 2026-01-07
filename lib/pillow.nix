@@ -37,11 +37,7 @@
       modules,
       specialArgs ? { },
     }:
-    let
-      system = pillow.hostPlatform;
-    in
     lib.nixosSystem {
-      inherit system;
       modules =
         modules
         ++ [
@@ -59,7 +55,6 @@
           pillow
           inputs
           version
-          system
           ;
       };
     };
