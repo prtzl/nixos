@@ -23,6 +23,9 @@ lib.pillowSystem rec {
           color = "#43a047";
         }
       ];
+      batteries = [
+        "BAT0"
+      ];
     };
   };
 
