@@ -49,4 +49,6 @@ in
     obs-studio.enable = true;
     wireshark.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [ arduino ];
 }

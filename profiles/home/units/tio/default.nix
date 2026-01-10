@@ -5,5 +5,5 @@
 
 {
   home.packages = with pkgs; [ tio ];
-  xdg.configFile."tio/tiorc".source = ./tiorc;
+  xdg.configFile."tio/config".source = ./tiorc;
 }
