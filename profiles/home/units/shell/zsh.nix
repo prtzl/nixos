@@ -22,6 +22,7 @@
       grep = "grep --color=always -n";
       ssh = "ssh -C";
       xclip = "xclip -selection clipboard";
+      grt = "cd \"$(git rev-parse --show-toplevel)\"";
 
       # System
       reboot = ''read -s \?"Reboot? [ENTER]: " && if [ -z "$REPLY" ];then env reboot;else echo "Canceled";fi'';
