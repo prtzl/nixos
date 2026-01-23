@@ -1,4 +1,5 @@
 {
+  config,
   pillow,
   ...
 }:
@@ -9,10 +10,11 @@
   programs.zsh = {
     enable = true;
     autocd = true;
-    enableCompletion = true;
     autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
+    enableCompletion = true;
     historySubstringSearch.enable = true;
+    syntaxHighlighting.enable = true;
 
     shellAliases = {
       # Utilities

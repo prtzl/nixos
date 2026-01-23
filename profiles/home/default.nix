@@ -1,7 +1,8 @@
 {
+  config,
   lib,
-  pkgs,
   pillow,
+  pkgs,
   version,
   ...
 }:
@@ -67,4 +68,12 @@
     ++ lib.optionals pillow.onHardware [
       monitorets # GUI for temperature sensors
     ];
+
+  # python: Don't put python dotshit into home
+  home.sessionVariables = {
+    PYTHON_HISTORY = "${config.xdg.stateHome}/python/history";
+  };
+  home.activation.createPythonHistoryDir = ''
+    mkdir -p ${config.xdg.stateHome}/python
+  '';
 }
