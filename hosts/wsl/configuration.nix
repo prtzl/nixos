@@ -7,6 +7,7 @@
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
+  wsl.interop.register = false;
 
   services.openssh = {
     enable = true;
