@@ -81,7 +81,8 @@
         parted # partitions
         ripgrep # modern grep
         vim # backup, always nice
-        xh
+        xh # TODO: what?
+        file # shows file info (standard linux utility)
       ]
       ++ lib.optionals (pillow.onHardware) [
         hwinfo # self explanatory

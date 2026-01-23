@@ -29,6 +29,16 @@
   home.stateVersion = version;
   # programs.nvimnix.enable = true; # my nvim always use
 
+  programs.vim = {
+    enable = true;
+    extraConfig = ''
+      set viminfo=%,'1000,<500,s100,h,n~/.local/state/vim/viminfo
+    '';
+  };
+  home.activation.createVimHistoryDir = ''
+    mkdir -p ${config.xdg.stateHome}/vim
+  '';
+
   home.packages =
     with pkgs;
     [
