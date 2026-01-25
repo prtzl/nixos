@@ -47,11 +47,18 @@ in
 
   services.hardware.openrgb.enable = true;
   services.hardware.openrgb.motherboard = "amd";
+  services.openssh = {
+    enable = true;
+    ports = [ 8022 ];
+  };
 
   programs = {
     obs-studio.enable = true;
     wireshark.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [ arduino ];
+  environment.systemPackages = with pkgs; [
+    arduino
+    rsync
+  ];
 }
