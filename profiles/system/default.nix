@@ -84,6 +84,7 @@
         xh # TODO: what?
         file # shows file info (standard linux utility)
         nmap # sniff ports
+        sd # modern sed (handles escapes like rg automatically)
       ]
       ++ lib.optionals (pillow.onHardware) [
         hwinfo # self explanatory
