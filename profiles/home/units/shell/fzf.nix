@@ -3,6 +3,7 @@
 {
   programs.fzf = {
     enable = true;
+    tmux.enableShellIntegration = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
     fileWidgetOptions = [
