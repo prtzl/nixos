@@ -52,6 +52,6 @@ in
   programs.rofi = {
     enable = true;
     package = rofipackage;
-    theme = rofitheme;
+    # theme = rofitheme;
   };
 }
