@@ -102,7 +102,7 @@
           };
 
           extraSpecialArgs = {
-            inherit version;
+            inherit inputs version;
             pillow = pillow // {
               inherit personal;
             };

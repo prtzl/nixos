@@ -21,10 +21,10 @@
       eza
       fd
       fzf
-      lazygit
       ripgrep
       tree
       xclip
+      zoxide
       zsh-completions
     ]
     ++ lib.optionals (pillow.edition == "wsl") [ (import ./wslgit.nix { inherit pkgs; }) ];

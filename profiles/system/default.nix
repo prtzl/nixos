@@ -76,15 +76,16 @@
         eza # replacement for exa, replacement for ls
         fastfetch # replacement for neofetch :'(
         fd # modern find
+        file # shows file info (standard linux utility)
         fx # json  viewer
+        git # yeah
         jq # json processor
+        nmap # sniff ports
         parted # partitions
         ripgrep # modern grep
+        sd # modern sed (handles escapes like rg automatically)
         vim # backup, always nice
         xh # TODO: what?
-        file # shows file info (standard linux utility)
-        nmap # sniff ports
-        sd # modern sed (handles escapes like rg automatically)
       ]
       ++ lib.optionals (pillow.onHardware) [
         hwinfo # self explanatory

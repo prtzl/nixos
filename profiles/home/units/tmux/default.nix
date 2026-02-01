@@ -5,7 +5,7 @@
 }:
 
 {
-  home.packages = with pkgs.pkgs-unstable; [
+  home.packages = with pkgs; [
     zoxide
   ];
 
@@ -38,7 +38,7 @@
 
   programs.sesh = {
     enable = true;
-    package = pkgs.pkgs-unstable.sesh;
+    package = pkgs.sesh;
     icons = false;
     tmuxKey = null; # I'll do this, thank you
     fzfPackage = config.programs.fzf.package;

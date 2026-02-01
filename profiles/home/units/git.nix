@@ -1,10 +1,12 @@
 {
+  inputs,
   lib,
   ...
 }:
 
 {
   programs.difftastic.enable = true;
+
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -16,5 +18,11 @@
       # Git doesn't like this, so I'm placing this here
       safe.directory = "/etc/nixos";
     };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    # get the same lazygit config that I do in my nvimnix (since it needs to be portable, it's defined there)
+    settings = inputs.nvimnix.lazygit-settings or { };
   };
 }
