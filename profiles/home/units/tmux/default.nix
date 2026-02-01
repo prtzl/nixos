@@ -5,9 +5,9 @@
 }:
 
 {
-  home.packages = with pkgs; [
-    zoxide
-  ];
+  programs.zoxide = {
+    enable = true;
+  };
 
   programs.tmux = {
     enable = true;

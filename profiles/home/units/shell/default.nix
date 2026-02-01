@@ -24,10 +24,15 @@
       ripgrep
       tree
       xclip
-      zoxide
       zsh-completions
     ]
     ++ lib.optionals (pillow.edition == "wsl") [ (import ./wslgit.nix { inherit pkgs; }) ];
+
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
 
   home.sessionVariables = {
     TERM = "xterm-256color";
