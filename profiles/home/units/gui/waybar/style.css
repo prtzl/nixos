@@ -5,7 +5,8 @@
 }
 
 window#waybar {
-    background-color: rgba(26, 26, 26, 1);
+    background-color: rgba(26, 26, 26, 0.8);
+    border-radius: 0 0 0.5rem 0.5rem;;
 }
 
 /* Should include global settings for ALL widgets, so only excluding the bar itself (configured a few lines up) */
@@ -20,7 +21,6 @@ window#waybar {
 #temperature,
 #tray,
 #workspaces {
-    border: 0.3rem solid rgba(76, 76, 76, 1);
     border-radius: 1rem;
     color: #fdf6e3;
     margin: 0 0.3rem;
@@ -28,7 +28,6 @@ window#waybar {
 }
 
 #tray {
-    border: 0.3rem dashed rgba(76, 76, 76, 1);
     padding: 0 0.5rem;
 }
 #tray > .passive {
