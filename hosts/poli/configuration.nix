@@ -21,7 +21,7 @@ in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
+    # inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-pc
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ]
@@ -39,10 +39,18 @@ in
 
   hardware = {
     openrazer.enable = true;
-    graphics.enable = true;
-    graphics.extraPackages = with pkgs; [
-      vpl-gpu-rt
+    graphics = {
+      enable = true;
+      package = pkgs.pkgs-unstable.mesa;
+      package32 = pkgs.pkgs-unstable.pkgsi686Linux.mesa;
+    };
+    graphics.extraPackages = with pkgs.pkgs-unstable; [
+      intel-media-driver
       intel-vaapi-driver
+      mesa
+      vpl-gpu-rt
+      vulkan-loader
+      vulkan-validation-layers
     ];
   };
 
