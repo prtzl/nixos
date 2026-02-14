@@ -54,6 +54,13 @@ in
     ];
   };
 
+  zramSwap = {
+    enable = true;
+    priority = 100;
+    algorithm = "lz4";
+    memoryPercent = 50;
+  };
+
   services.hardware.openrgb.enable = true;
   services.hardware.openrgb.motherboard = "amd";
   services.openssh = {
