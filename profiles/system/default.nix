@@ -86,7 +86,6 @@
         sd # modern sed (handles escapes like rg automatically)
         tldr # man, but faster for finding usage
         vim # backup, always nice
-        xh # TODO: what?
       ]
       ++ lib.optionals (pillow.onHardware) [
         hwinfo # self explanatory
