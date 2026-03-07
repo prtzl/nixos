@@ -4,17 +4,14 @@
 }:
 
 let
-  updateScript = pkgs.writeShellScript "update.sh" "${builtins.readFile ./update.sh}";
-  makeUpdate =
-    kind:
-    pkgs.writeShellApplication {
-      name = "${kind}-update";
-      runtimeInputs = [ pkgs.nvd ];
-      text = ''
-        ${updateScript} ${kind} "$@"
-      '';
-    };
+  nixos-update = pkgs.writeShellApplication {
+    name = "nixos-update";
+    runtimeInputs = [ pkgs.nvd ];
+    text = ''
+      exec bash ${./update.sh} "nixos" "$@"
+    '';
+  };
 in
 {
-  environment.systemPackages = [ (makeUpdate "nixos") ];
+  environment.systemPackages = [ nixos-update ];
 }
