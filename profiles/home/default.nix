@@ -11,16 +11,17 @@
   imports =
     with (lib.findModules ./units);
     [
-      ./units/shell
       btop
       git
       ranger
+      shell
       tmux
     ]
     ++ lib.optionals (pillow.hasGUI) [
-      ./units/gui
       alacritty
+      celluloid
       firefox
+      gui
     ]
     ++ lib.optionals (pillow.onHardware) [
       tio
@@ -63,7 +64,6 @@
       libreoffice
       gimp
       inkscape
-      haruna # video player (best one yet, nice ui, celluloid is broken somehow)
       gthumb # image viewer
 
       # file explorer
