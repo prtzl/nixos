@@ -9,9 +9,9 @@ let
   rofilauncher = pkgs.writeShellApplication {
     name = "rofilauncher";
     runtimeInputs = with pkgs; [
-      rofipackage
-      jq
       bc
+      jq
+      rofipackage
     ];
     text = ''
       # 10% screen coverage of rofi launcher
