@@ -12,4 +12,7 @@ let
 in
 {
   home.packages = [ celluloid ];
+
+  home.file.".local/share/applications/celluloid.desktop".source =
+    "${pkgs.celluloid}/share/applications/io.github.celluloid_player.Celluloid.desktop";
 }

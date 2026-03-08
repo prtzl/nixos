@@ -2,7 +2,7 @@
 
 # re-use celluloid in same WS or open new
 
-file="$1"
+file="${1:-}"
 player="Celluloid"
 
 ws=$(hyprctl activeworkspace -j | jq -r '.id')
