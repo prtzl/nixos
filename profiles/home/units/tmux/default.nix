@@ -15,9 +15,6 @@
       unbind-key s
       bind-key "S" choose-session # move default session switcher
 
-      bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
-      set -g detach-on-destroy off  # don't exit from tmux when closing a session
-
       bind-key "s" run-shell "sesh connect \"$(
         sesh list --icons | fzf --tmux 80%,70% \
           --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
@@ -38,7 +35,7 @@
 
   programs.sesh = {
     enable = true;
-    package = pkgs.sesh;
+    package = pkgs.pkgs-unstable.sesh;
     icons = false;
     tmuxKey = null; # I'll do this, thank you
     fzfPackage = config.programs.fzf.package;
