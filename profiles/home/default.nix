@@ -52,7 +52,7 @@
       transmission_4-gtk
 
       # Utility
-      pkgs-unfree.enpass
+      # pkgs-unstable.enpass
       qalculate-gtk # calculator fyi
       gnome-disk-utility
 
