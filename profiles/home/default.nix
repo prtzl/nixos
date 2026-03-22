@@ -69,7 +69,7 @@
       transmission_4-gtk
 
       # Utility
-      my-enpass
+      pkgs-unstable.enpass # my-enpass
       qalculate-gtk # calculator fyi
       gnome-disk-utility
 
