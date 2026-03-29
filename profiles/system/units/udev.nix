@@ -3,17 +3,9 @@
   ...
 }:
 
-let
-  mkFree =
-    drv:
-    drv.overrideAttrs (attrs: {
-      meta = attrs.meta // {
-        license = "";
-      };
-    });
-  # jlink = mkFree local.jlink-pack.defaultPackage."${pillow.hostPlatform}";
-in
 {
+  services.jlink.enable = true;
+
   environment.systemPackages = with pkgs; [
     lm_sensors
   ];

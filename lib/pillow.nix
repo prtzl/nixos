@@ -47,6 +47,7 @@
         ]
         ++ (lib.optionals pillow.useDefaults [
           inputs.nvimnix.nixosModules.default
+          inputs.jlink.nixosModules.default
           ../profiles/system
         ]);
 
