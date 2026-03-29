@@ -22,8 +22,8 @@
     nvimnix.url = "github:prtzl/nvimnix";
     # nvimnix.url = "/home/matej/projects/git/nvimnix";
     jlink = {
-      url = "/home/matej/projects/git/jlink-nix/master";
-      # url = "github:prtzl/jlink-nix";
+      url = "github:prtzl/jlink-nix";
+      # url = "/home/matej/projects/git/jlink-nix/master";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };

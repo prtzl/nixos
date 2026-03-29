@@ -68,6 +68,8 @@ in
     ports = [ 8022 ];
   };
 
+  services.jlink.enable = true;
+
   programs = {
     obs-studio.enable = true;
     wireshark.enable = true;

@@ -4,8 +4,6 @@
 }:
 
 {
-  services.jlink.enable = true;
-
   environment.systemPackages = with pkgs; [
     lm_sensors
   ];
@@ -24,6 +22,5 @@
 
       # Somehow added jlink file to udev does not get picked up :/
     '';
-    # ${builtins.readFile "${jlink}/lib/udev/rules.d/99-jlink.rules"}
   };
 }

@@ -103,14 +103,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1774822596,
-        "narHash": "sha256-549kCNnd33xVbQTRDbcBFI8jqj9PwCg3UP6iPC4dwFQ=",
-        "path": "/home/matej/projects/git/jlink-nix/master",
-        "type": "path"
+        "lastModified": 1774823442,
+        "narHash": "sha256-WPuDrRFx0e07liQJ4X0unvJ7rXvo7ZM4g164EiTQ75k=",
+        "owner": "prtzl",
+        "repo": "jlink-nix",
+        "rev": "0cb6f21ba64702e4ae75ddb4ba743151ea3e2556",
+        "type": "github"
       },
       "original": {
-        "path": "/home/matej/projects/git/jlink-nix/master",
-        "type": "path"
+        "owner": "prtzl",
+        "repo": "jlink-nix",
+        "type": "github"
       }
     },
     "nix-monitored": {
