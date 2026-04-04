@@ -34,6 +34,8 @@
     enableZshIntegration = true;
   };
 
+  programs.difftastic.enable = true; # fancy diff tool
+
   home.sessionVariables = {
     TERM = "xterm-256color";
   };

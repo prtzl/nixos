@@ -5,7 +5,10 @@
 }:
 
 {
-  programs.difftastic.enable = true;
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
+  };
 
   programs.git = {
     enable = true;
