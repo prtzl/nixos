@@ -21,7 +21,7 @@ in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
-    # inputs.nixos-hardware.nixosModules.common-gpu-intel
+    # inputs.nixos-hardware.nixosModules.common-gpu-intel # adding intel-media-driver manually from unstable (xe!)
     inputs.nixos-hardware.nixosModules.common-pc
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ]
