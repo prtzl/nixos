@@ -1,9 +1,7 @@
 {
-  inputs,
   lib,
   pillow,
   pkgs,
-  version,
   ...
 }:
 
@@ -12,7 +10,9 @@
   imports =
     with (lib.findModules ./units);
     [
+      env
       findre
+      nixos
       update
     ]
     ++ lib.optionals (pillow.edition == "workstation") [
@@ -21,242 +21,15 @@
     ++ lib.optionals (pillow.hasGUI) [
       firefox
       hyprland
+      {
+        xdg.portal = {
+          enable = true;
+          extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+        };
+      }
     ]
     ++ lib.optionals (pillow.onHardware) [
       pipewire
-      udev
+      hardware
     ];
-
-  system.stateVersion = version;
-  nixpkgs = {
-    hostPlatform = "${pillow.hostPlatform}";
-    overlays = [
-      (final: prev: {
-        pkgs-unfree = import inputs.nixpkgs {
-          localSystem = final.stdenv.buildPlatform;
-          hostPlatform = final.stdenv.hostPlatform;
-          config.allowUnfree = true;
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          localSystem = final.stdenv.buildPlatform;
-          hostPlatform = final.stdenv.hostPlatform;
-          config.allowUnfree = true;
-        };
-      })
-    ];
-  };
-  # Create group where all members (privileged) have access to /etc/nixos where the config SHOULD be placed
-  users.groups.nixos-editors = { };
-  systemd.tmpfiles.rules = [
-    "d /etc/nixos 0770 root nixos-editors -"
-  ];
-
-  environment = {
-    shells = with pkgs; [
-      bashInteractive
-      zsh
-    ];
-    variables = {
-      EDITOR = "vim";
-    };
-    sessionVariables = {
-      XDG_CACHE_HOME = "$HOME/.cache";
-      XDG_CONFIG_HOME = "$HOME/.config";
-      XDG_DATA_HOME = "$HOME/.local/share";
-      XDG_STATE_HOME = "$HOME/.local/state";
-    };
-    # philosohpy: only those that I could see using on a bare (shell) system
-    # Also not opinionated - like everyone is using rg, fd, etc ...
-    # Save the rest for home defaults or per-user
-    systemPackages =
-      with pkgs;
-      [
-        bat # replacement for cat
-        btop # system info graphs, usage, etc. Modern top
-        eza # replacement for exa, replacement for ls
-        fastfetch # replacement for neofetch :'(
-        fd # modern find
-        file # shows file info (standard linux utility)
-        fx # json  viewer
-        git # yeah
-        jq # json processor
-        nmap # sniff ports
-        parted # partitions
-        ripgrep # modern grep
-        sd # modern sed (handles escapes like rg automatically)
-        tldr # man, but faster for finding usage
-        vim # backup, always nice
-        wget # get web, he he
-      ]
-      ++ lib.optionals (pillow.onHardware) [
-        hwinfo # self explanatory
-        pciutils # info on pci devices
-        smartmontools # disk checks
-        udiskie # automounts using udisks2
-        usbutils # info on usb devices
-      ];
-  };
-
-  # As on top - only what a bare system would really like to have
-  programs = {
-    usbtop.enable = pillow.onHardware;
-    zsh.enable = true;
-    nvimnix.enable = true; # my nvim, always use
-  };
-
-  # Some stuff that can change based on system, so use mkDefault
-  boot =
-    if pillow.onHardware then
-      {
-        kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-        loader = {
-          systemd-boot = {
-            enable = lib.mkDefault true;
-            consoleMode = "max";
-          };
-          efi.canTouchEfiVariables = lib.mkDefault true;
-        };
-        # Following nonsense with plymouth is to enable startup animation
-        # Silent boot
-        consoleLogLevel = 3;
-        initrd.verbose = false;
-        # loader.timeout = 0;
-        kernelParams = [
-          "boot.shell_on_fail"
-          "quiet"
-          "rd.systemd.show_status=auto"
-          "splash"
-          "udev.log_level=3"
-        ];
-        plymouth = {
-          enable = true;
-          theme = "rings";
-          themePackages = with pkgs; [
-            (adi1090x-plymouth-themes.override {
-              selected_themes = [ "rings" ];
-            })
-          ];
-        };
-      }
-    else
-      { };
-
-  nix = {
-    monitored = {
-      enable = true;
-      notify = false;
-    };
-    registry = {
-      # nixpkgs (default) == stable branch (my default)
-      stable.flake = inputs.nixpkgs;
-      unstable.flake = inputs.nixpkgs-unstable;
-      master.to = {
-        owner = "nixos";
-        repo = "nixpkgs";
-        type = "github";
-      };
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-    settings = {
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
-      auto-optimise-store = true;
-    };
-    extraOptions = ''
-      experimental-features = nix-command flakes ca-derivations
-      binary-caches-parallel-connections = 50
-      preallocate-contents = false
-    '';
-  };
-
-  systemd.network.wait-online.extraArgs = map (
-    interface: "--interface=${interface}"
-  ) pillow.host.interfaces;
-
-  networking = {
-    enableIPv6 = false;
-    firewall.enable = true;
-    hostName = pillow.host.name;
-    networkmanager.enable = true;
-  };
-
-  i18n = {
-    defaultLocale = "en_GB.UTF-8";
-    extraLocales = "all";
-  };
-
-  services = {
-    fwupd.enable = pillow.onHardware;
-    geoclue2.enable = true; # required for localtimed (fails if not found)
-    localtimed.enable = true; # time and datre control (otherwise I'm off :O
-    printing.enable = pillow.onHardware; # printing drivers
-    udisks2.enable = pillow.onHardware; # daemon for mounting storage devices (usbs and such)
-    usbmuxd.enable = pillow.onHardware; # usb info
-  };
-
-  location.provider = "geoclue2"; # required for geoclue2 service, which ...
-
-  users.defaultUserShell = pkgs.zsh;
-
-  fonts = {
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
-        monospace = [ "FiraCode Nerd Font" ];
-        emoji = [ "Noto Color Emoji" ];
-      };
-    };
-    fontDir.enable = true;
-    packages = with pkgs; [
-      fira
-      fira-code
-      fira-mono
-      nerd-fonts.fira-code
-      noto-fonts
-      noto-fonts-color-emoji
-    ];
-  };
-
-  xdg.portal =
-    if pillow.hasGUI then
-      {
-        enable = true;
-        extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-      }
-    else
-      { };
-
-  # xdg.mime.inverted.defaultApplications."gthumb.desktop" = lib.optionals (pillow.hasGUI) [
-  #   "image/bmp"
-  #   "image/gif"
-  #   "image/jpeg"
-  #   "image/jpg"
-  #   "image/pjpeg"
-  #   "image/png"
-  #   "image/svg+xml"
-  #   "image/svg+xml-compressed"
-  #   "image/tiff"
-  #   "image/vnd.wap.wbmp"
-  #   "image/x-bmp"
-  #   "image/x-gray"
-  #   "image/x-icb"
-  #   "image/x-icns"
-  #   "image/x-ico"
-  #   "image/x-pcx"
-  #   "image/x-png"
-  #   "image/x-portable-anymap"
-  #   "image/x-portable-bitmap"
-  #   "image/x-portable-graymap"
-  #   "image/x-portable-pixmap"
-  #   "image/x-xbitmap"
-  #   "image/x-xpixmap"
-  # ];
 }
