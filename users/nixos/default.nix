@@ -11,6 +11,11 @@ lib.pillowUser pillow {
 
   name = "nixos";
 
+  extraGroups = [
+    "usb"
+    "dialout"
+  ];
+
   extraSpecialArgs = {
   };
 }
