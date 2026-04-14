@@ -11,7 +11,7 @@
     hyprcursor # I guess this has to come separately
     wl-clipboard # clipboard (why is this additional, like  what?)
     networkmanagerapplet # brings network manager applet functionality
-    hyprshot # screenshot utility
+    grimblast # screenshot utility
   ];
 
   # The jummy thing about this is that now as a service it reloads on configurations change automatically!
