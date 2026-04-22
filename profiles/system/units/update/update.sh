@@ -55,7 +55,7 @@ function cleanup()
 ## Boilerplate finished
 
 home_derivation="$USER-$(hostname)"
-nixos_derivation="$(hostname)"
+nixos_derivation="${NIXOS_HOST:-"$(hostname)"}"
 
 
 # First argument is build type and should only be home or nixos.

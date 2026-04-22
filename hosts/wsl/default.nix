@@ -9,7 +9,7 @@ lib.pillowSystem rec {
     hostPlatform = "x86_64-linux";
 
     host = {
-      name = "wsl";
+      name = "nixos";
       interfaces = [ "eth0" ];
       disks = [ "/" ];
     };
