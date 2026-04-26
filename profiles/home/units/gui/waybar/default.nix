@@ -22,13 +22,26 @@ let
   makeBattery = path: index: {
     battery = {
       bat = "BAT0";
-      interval = 60;
-      states = {
-        warning = 30;
-        critical = 15;
-      };
-      format = "{capacity}%";
+      format = "{icon} {capacity}%";
+      format-charging = " {capacity}%";
+      format-full = " {capacity}%";
+      format-plugged = " {capacity}%";
+      format-critical = " {capacity}%";
+      format-icons = [ " " ];
+      interval = 3;
       max-length = 25;
+      states = {
+        critical = 15;
+        warning = 30;
+      };
+      events = {
+        on-discharging-warning = "notify-send -u normal 'Low Battery'";
+        on-discharging-critical = "notify-send -u critical 'Very Low Battery'";
+        on-charging-100 = "notify-send 'Battery Full!'";
+        on-discharging = "notify-send 'discharging'";
+        on-charging = "notify-send 'charging!'";
+        on-plugged = "notify-send 'plugged int'";
+      };
     };
   };
 
@@ -36,16 +49,31 @@ let
     batteries: lib.lists.imap1 (index: battery: makeBattery battery index) batteries;
   batteryConfigs = lib.foldl' (acc: x: acc // x) { } (makeBatteryConfigs selectedBatteries);
 
-  makeBatteryStyle =
-    name: index:
-    let
-      color = "#028909";
-    in
-    ''
-      #battery {
-        color: ${color};
-      }
-    '';
+  makeBatteryStyle = name: index: ''
+    #battery {
+      color: #028909;
+    }
+
+    #battery.warning {
+      color: #ffa500; /* orange */
+    }
+
+    #battery.critical {
+      color: #ff0000; /* red */
+    }
+
+    #battery.charging {
+      color: #ffd700; /* yellow */
+    }
+
+    #battery.plugged {
+      color: #a6799d; /* yellow */
+    }
+
+    #battery.full {
+      color: #7979fc; /* yellow */
+    }
+  '';
 
   batteryStyles = builtins.concatStringsSep "\n" (
     lib.lists.imap1 (index: battery: makeBatteryStyle battery index) selectedBatteries
