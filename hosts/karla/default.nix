@@ -27,6 +27,12 @@ lib.pillowSystem rec {
         "BAT0"
       ];
     };
+    settings.hyprland = {
+      bind = [
+        ", XF86MonBrightnessUp, exec, mybrightness up"
+        ", XF86MonBrightnessDown, exec, mybrightness down"
+      ];
+    };
   };
 
   modules = (lib.findModulesList ./.) ++ [

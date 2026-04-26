@@ -21,7 +21,9 @@
     # Enabled hyprland-session.target which links to graphical-session.target.
     # Using this target for other services waiting for the "gui" to start (for example waybar)
     systemd.enable = true;
+    # main hyprland config in native format
     extraConfig = builtins.readFile ./hyprland.conf;
+    # hyprland config in nix format - programmable part
     settings =
       let
         defaultSettings = {

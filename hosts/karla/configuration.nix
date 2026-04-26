@@ -5,6 +5,10 @@
 }:
 
 {
+  imports = with (lib.findModules ../../profiles/system/units); [
+    brightness
+  ];
+
   services = {
     acpid.enable = true;
     blueman.enable = true;
