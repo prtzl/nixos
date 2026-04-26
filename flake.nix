@@ -20,7 +20,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     waybar = {
       url = "github:Alexays/Waybar";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs"; # consumes more, but will not break OR rebuild when nixpkgs gets updated (often)
     };
 
     nvimnix.url = "github:prtzl/nvimnix";
