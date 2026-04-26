@@ -26,21 +26,27 @@ let
       format-charging = " {capacity}%";
       format-full = " {capacity}%";
       format-plugged = " {capacity}%";
-      format-critical = " {capacity}%";
-      format-icons = [ " " ];
-      interval = 3;
+      format-icons = [
+        ""
+        ""
+        ""
+        ""
+        ""
+      ];
+      interval = 1;
       max-length = 25;
       states = {
         critical = 15;
         warning = 30;
       };
       events = {
-        on-discharging-warning = "notify-send -u normal 'Low Battery'";
-        on-discharging-critical = "notify-send -u critical 'Very Low Battery'";
-        on-charging-100 = "notify-send 'Battery Full!'";
-        on-discharging = "notify-send 'discharging'";
-        on-charging = "notify-send 'charging!'";
-        on-plugged = "notify-send 'plugged int'";
+        on-discharging-warning = "notify-send -u critical -t 3000 'Battery' 'Low Battery'";
+        on-discharging-critical = "notify-send -u critical -t 3000 'Battery' 'Very Low Battery'";
+        on-charging-100 = "notify-send -u normal -t 1000 'Battery' 'Full!'";
+        on-discharging = "notify-send -u normal -t 1000 'Battery' 'Discharging!'";
+        on-charging = "notify-send -u normal -t 1000 'Battery' 'Charging!'";
+        on-plugged = "notify-send -u normal -t 1000 'Battery' 'Plugged in!'";
+        on-unplugged = "notify-send -u normal -t 1000 'Battery' 'Plugged out!'";
       };
     };
   };
