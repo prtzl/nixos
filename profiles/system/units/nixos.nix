@@ -57,6 +57,7 @@
           config.allowUnfree = true;
         };
       })
+      inputs.waybar.overlays.waybar
     ];
   };
 
