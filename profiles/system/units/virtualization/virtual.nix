@@ -1,6 +1,4 @@
 {
-  lib,
-  pillow,
   pkgs,
   ...
 }:
@@ -16,22 +14,11 @@
       };
     };
     spiceUSBRedirection.enable = true;
-    containers.enable = true; # some common stuff?
-    docker.enable = true;
-    podman = {
-      enable = true;
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
   };
 
   environment.systemPackages = with pkgs; [
-    dive # look into docker image layers
-    docker-compose
     fuse-overlayfs
     libguestfs
-    podman-compose
-    podman-tui # status of containers in the terminal
     spice-gtk
     spice-vdagent
     swtpm
