@@ -5,8 +5,9 @@
 }:
 
 let
-  enablePodman = pillow.settings.container.podman.enable or false;
-  enableDocker = pillow.settings.container.docker.enable or false;
+  isWorkstation = pillow.edition == "workstation"; # always install all on workstation
+  enablePodman = pillow.settings.container.podman.enable or isWorkstation;
+  enableDocker = pillow.settings.container.docker.enable or isWorkstation;
   enableContainer = enableDocker || enablePodman;
 in
 {
