@@ -1,5 +1,6 @@
 {
   config,
+  myShell,
   pillow,
   ...
 }:
@@ -16,23 +17,7 @@
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = {
-      # Utilities
-      ls = "eza --group-directories-first --color=always --icons";
-      l = "ls -la";
-      ll = "ls -l";
-      grep = "grep --color=always -n";
-      ssh = "ssh -C";
-      xclip = "xclip -selection clipboard";
-      grt = "cd \"$(git rev-parse --show-toplevel)\"";
-
-      # System
-      reboot = ''read -s \?"Reboot? [ENTER]: " && if [ -z "$REPLY" ];then env reboot;else echo "Canceled";fi'';
-      poweroff = ''read -s \?"Poweroff? [ENTER]: " && if [ -z "$REPLY" ];then env poweroff;else echo "Canceled";fi'';
-      udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
-
-    }
-    // (if (pillow.edition == "wsl") then { git = "wslgit"; } else { });
+    shellAliases = myShell.aliases // (if (pillow.edition == "wsl") then { git = "wslgit"; } else { });
 
     history = {
       expireDuplicatesFirst = true;
@@ -40,12 +25,12 @@
       ignoreDups = true;
       ignoreSpace = true;
       path = "$HOME/.config/zsh/.zsh_history";
-      save = 100000;
+      save = myShell.historyFileSize;
+      size = myShell.historySize;
       share = true;
-      size = 100000;
     };
 
-    initContent = ''
+    initContent = myShell.posixInit + ''
       # Nice completion with menus 
       zstyle ':completion:*' menu select
       zstyle ':completion:*' group-name ""
@@ -65,25 +50,6 @@
 
       # enable vim mode (default is insert, esc gets you to normal)
       bindkey -v
-
-      # Don't save a command into history if it failed to evaluate.
-      # If it runs but fails, it is still saved. No worries of loosing typoed commands.
-      zshaddhistory() {
-        whence ''${''${(z)1}[1]} >| /dev/null || return 1
-      }
-
-      # Prevents direnv from yapping too much
-      export DIRENV_LOG_FORMAT=""
-
-      usage() {
-        du -h "''${1:-.}" --max-depth=1 2> /dev/null | sort -hr
-      }
-
-      git_bare_remote() {
-        remote=$1
-        git config remote.$remote.fetch "+refs/heads/*:refs/remotes/$remote/*"
-        git fetch $remote
-      }
     '';
   };
 }
