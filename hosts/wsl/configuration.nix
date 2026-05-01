@@ -41,15 +41,8 @@
     };
   };
 
-  environment = {
-    variables = {
-      NIXOS_HOST = pillow.host.name;
-    };
-
-    systemPackages = with pkgs; [
-      kmod
-      usbutils
-    ];
-  };
-
+  environment.systemPackages = with pkgs; [
+    kmod
+    usbutils
+  ];
 }

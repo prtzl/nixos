@@ -14,6 +14,7 @@
     ];
     variables = {
       EDITOR = "vim";
+      NIXOS_HOST = pillow.host.name;
     };
     sessionVariables = {
       XDG_CACHE_HOME = "$HOME/.cache";
