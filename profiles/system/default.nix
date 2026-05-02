@@ -10,7 +10,7 @@
   imports =
     with (lib.findModules ./units);
     [
-      env
+      environment
       findre
       nixos
       update

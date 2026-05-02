@@ -5,6 +5,8 @@
 }:
 
 {
+  imports = [ ./fonts.nix ];
+
   users.defaultUserShell = pkgs.zsh;
 
   environment = {
@@ -23,8 +25,7 @@
       XDG_STATE_HOME = "$HOME/.local/state";
     };
     # philosohpy: only those that I could see using on a bare (shell) system
-    # Also not opinionated - like everyone is using rg, fd, etc ...
-    # Save the rest for home defaults or per-user
+    # Also not opinionated - like everyone is using rg, fd, etc., right?
     systemPackages =
       with pkgs;
       [
@@ -56,9 +57,9 @@
 
   # As on top - only what a bare system would really like to have
   programs = {
+    nvimnix.enable = true; # my nvim, always use
     usbtop.enable = pillow.onHardware;
     zsh.enable = true;
-    nvimnix.enable = true; # my nvim, always use
   };
 
   services = {
@@ -75,26 +76,5 @@
   i18n = {
     defaultLocale = "en_GB.UTF-8";
     extraLocales = "all";
-  };
-
-  fonts = {
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Noto Sans" ];
-        monospace = [ "FiraCode Nerd Font" ];
-        emoji = [ "Noto Color Emoji" ];
-      };
-    };
-    fontDir.enable = true;
-    packages = with pkgs; [
-      fira
-      fira-code
-      fira-mono
-      nerd-fonts.fira-code
-      noto-fonts
-      noto-fonts-color-emoji
-    ];
   };
 }
