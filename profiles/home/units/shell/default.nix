@@ -17,7 +17,8 @@ let
 
       # System
       udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
-    };
+    }
+    // (if (pillow.edition == "wsl") then { git = "wslgit"; } else { });
 
     historySize = 100000;
     historyFileSize = 100000;

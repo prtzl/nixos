@@ -16,7 +16,7 @@
     historySize = myShell.historySize;
     historyFileSize = myShell.historyFileSize;
 
-    shellAliases = myShell.aliases // (if (pillow.edition == "wsl") then { git = "wslgit"; } else { });
+    shellAliases = myShell.aliases;
 
     initExtra = myShell.posixInit + "";
   };

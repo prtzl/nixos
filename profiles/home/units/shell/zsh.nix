@@ -17,7 +17,7 @@
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = myShell.aliases // (if (pillow.edition == "wsl") then { git = "wslgit"; } else { });
+    shellAliases = myShell.aliases;
 
     history = {
       expireDuplicatesFirst = true;
