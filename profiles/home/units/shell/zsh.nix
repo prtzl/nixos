@@ -13,7 +13,7 @@
     autocd = true;
     autosuggestion.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
-    enableCompletion = true;
+    enableCompletion = false; # do it manually
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -24,17 +24,27 @@
       ignoreAllDups = true;
       ignoreDups = true;
       ignoreSpace = true;
-      path = "$HOME/.config/zsh/.zsh_history";
+      path = "${config.xdg.cacheHome}/zsh/.zsh_history";
       save = myShell.historyFileSize;
       size = myShell.historySize;
       share = true;
     };
 
     initContent = myShell.posixInit + ''
+      zstyle ':completion:*' use-cache on
+      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh"
+
+      autoload -U compinit
+      compinit -d "${config.xdg.cacheHome}/zsh/.zcompdump"
+
       # Nice completion with menus 
-      zstyle ':completion:*' menu select
+      setopt AUTO_MENU
+      setopt MENU_COMPLETE
+
       zstyle ':completion:*' group-name ""
       zstyle ':completion:*' matcher-list "" 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' rehash true
       _comp_options+=(globdots)
 
       # fix ls alias not autocompleting since it's aliased
