@@ -5,7 +5,10 @@
 }:
 
 {
-  imports = [ <nixos-wsl/modules> ];
+  imports = [
+    <nixos-wsl/modules>
+    ./usbipd.nix
+  ];
 
   wsl = {
     enable = true;
