@@ -35,7 +35,15 @@
 
   programs.sesh = {
     enable = true;
-    package = pkgs.pkgs-unstable.sesh;
+    package = pkgs.pkgs-unstable.sesh.overrideAttrs (old: rec {
+      version = "2.25.0";
+      src = pkgs.fetchFromGitHub {
+        owner = "joshmedeski";
+        repo = "sesh";
+        rev = "v${version}";
+        hash = "sha256-azs1tf9eR4MVSdjMdd3U/xdPAANn1Kyamf0TwFrBSTU=";
+      };
+    });
     icons = false;
     tmuxKey = null; # I'll do this, thank you
     fzfPackage = config.programs.fzf.package;
