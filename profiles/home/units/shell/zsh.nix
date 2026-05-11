@@ -24,7 +24,7 @@
       ignoreAllDups = true;
       ignoreDups = true;
       ignoreSpace = true;
-      path = "${config.xdg.cacheHome}/zsh/.zsh_history";
+      path = "${config.xdg.stateHome}/zsh/.zsh_history";
       save = myShell.historyFileSize;
       size = myShell.historySize;
       share = true;

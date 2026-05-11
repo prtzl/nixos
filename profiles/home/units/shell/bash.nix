@@ -12,7 +12,7 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    historyFile = "${config.xdg.configHome}/.bash_history";
+    historyFile = "${config.xdg.stateHome}/bash/.bash_history";
     historySize = myShell.historySize;
     historyFileSize = myShell.historyFileSize;
 

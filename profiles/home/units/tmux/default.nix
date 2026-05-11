@@ -49,7 +49,7 @@
     fzfPackage = config.programs.fzf.package;
     enableTmuxIntegration = false; # customize my tmux prompt upstairs
     settings = {
-      import = [ "~/.local/share/sesh/sesh-local.toml" ]; # this has to exist!
+      import = [ "${config.xdg.stateHome}/sesh/sesh-local.toml" ]; # this has to exist!
     };
   };
 }
