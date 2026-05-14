@@ -27,4 +27,16 @@
     ];
     extraModulePackages = [ ];
   };
+
+  security.sudo.extraRules = [
+    {
+      users = [ "macho" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 }
