@@ -45,6 +45,16 @@ local calculator = "qalculate-gtk"
 --## AUTOSTART ###
 --################
 
+hl.on("hyprland.start", function()
+  hl.exec_cmd(
+  "/nix/store/99nasl1d5rzdqpkxiszg28ck7g17i24a-dbus-1.14.10/bin/dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target")
+  hl.exec_cmd("Enpass -minimize")
+  hl.exec_cmd("signal-desktop --start-in-tray")
+  hl.exec_cmd("nm-applet")
+  hl.exec_cmd("udiskie --tray --automount --notify")
+  hl.exec_cmd("systemctl --user start hyprpaper")
+end)
+
 --############################
 --## ENVIRONMENT VARIABLES ###
 --############################
@@ -79,11 +89,11 @@ hl.bind(mainMod .. " + f", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + s", hl.dsp.layout("togglesplit"))
 hl.bind("PRINT",
   hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copysave screen -o " ..
-    HOME .. "/Pictures/Screenshot/$(date +'%Y-%m-%d-%H%M%S')_screenshot.png"))
+    "$HOME" .. "/Pictures/Screenshot/$(date +'%Y-%m-%d-%H%M%S')_screenshot.png"))
 hl.bind("CTRL + PRINT", hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copy screen"))
 hl.bind("SHIFT + PRINT",
   hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copysave area -o " ..
-    HOME .. "/Pictures/Screenshot/$(date +'%Y-%m-%d-%H%M%S')_screenshot.png"))
+    "$HOME" .. "/Pictures/Screenshot/$(date +'%Y-%m-%d-%H%M%S')_screenshot.png"))
 hl.bind("CTRL + SHIFT + PRINT", hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copy area"))
 
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
@@ -123,8 +133,8 @@ hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({ direction = "r" }))
 hl.bind(mainMod .. " + CTRL + up", hl.dsp.window.move({ direction = "u" }))
 hl.bind(mainMod .. " + CTRL + down", hl.dsp.window.move({ direction = "d" }))
 
-hl.bind("CTRL_ALT + right", hl.dsp.focus({ workspace = "m+1" }))
-hl.bind("CTRL_ALT + left", hl.dsp.focus({ workspace = "m-1" }))
+hl.bind("CTRL + ALT + right", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind("CTRL + ALT + left", hl.dsp.focus({ workspace = "m-1" }))
 hl.bind(mainMod .. " + ALT + right", hl.dsp.focus({ workspace = "+1" }))
 hl.bind(mainMod .. " + ALT + left", hl.dsp.focus({ workspace = -1 }))
 
@@ -157,9 +167,9 @@ hl.window_rule({
     class = "^$",
     title = "^$",
     xwayland = 1,
-    floating = 1,
+    -- floating = 1,
     fullscreen = 0,
-    pinned = 0,
+    -- pinned = 0,
   },
   no_focus = true,
 })
@@ -203,11 +213,11 @@ hl.window_rule({
 hl.window_rule({
   match = {
     class = "thunar",
-    name = "Rename.*", -- TODO: check
+    -- name = "Rename.*", -- TODO: check
   },
   float = true,
   center = true,
-  focus = true,
+  -- focus = true,
 })
 
 hl.window_rule({
@@ -238,14 +248,14 @@ hl.config({
     border_size = 4,
     -- https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
     col = {
-      active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg",
+      -- active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg",
       inactive_border = "rgba(595959aa)",
     },
     -- Set to true enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = true,
     -- Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
     allow_tearing = false,
-    layout = "dwindle",
+    -- layout = "dwindle",
   },
   -- https://wiki.hyprland.org/Configuring/Variables/#decoration
   decoration = {
@@ -272,10 +282,10 @@ hl.config({
     enabled = false,
   },
   -- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-  dwindle = {
-    pseudotile = true,     -- # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = true, -- # You probably want this
-  },
+  -- dwindle = {
+  --   pseudotile = true,     -- # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+  --   preserve_split = true, -- # You probably want this
+  -- },
   -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
   master = {
     new_status = "master",
@@ -334,11 +344,3 @@ hl.config({
   -- pulseaudio always opens small. Increase it
   -- Override opacity to full (1.0) for certain apps IN certain scenarios
 })
-
-hl.on("hyprland.start", function()
-  hl.exec_cmd("Enpass -minimize")
-  hl.exec_cmd("signal-desktop --start-in-tray")
-  hl.exec_cmd("nm-applet")
-  hl.exec_cmd("udiskie --tray --automount --notify")
-  hl.exec_cmd("systemctl --user start hyprpaper")
-end)
