@@ -9,11 +9,13 @@ let
   myShell = {
     aliases = {
       # shell utils
-      ls = "eza --group-directories-first --color=always --icons";
-      l = "ls -la";
-      ll = "ls -l";
+      ls = "eza --group-directories-first --icons";
+      l = "eza -lag --icons --git";
+      ll = "ls -lg --icons --git";
       xclip = "xclip -selection clipboard";
-      rg = "rg -S"; # I would like smart case normally for ripgrep
+      rg = "rg -S --color=auto"; # I would like smart case normally for ripgrep
+      df = "df -h"; # human readable units
+      free = "free -m"; # memory units
 
       # System
       udevreload = "sudo udevadm control --reload-rules && sudo udevadm trigger";
