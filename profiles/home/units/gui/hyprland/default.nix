@@ -1,24 +1,32 @@
 {
   lib,
   pkgs,
-  nixosConfig,
+  inputs,
+  pillow,
   ...
 }:
 
+let
+  upstream-hyprland-inputs = inputs.hyprland;
+  upstream-hyprland-hyprcursor =
+    upstream-hyprland-inputs.inputs.hyprcursor.packages.${pillow.hostPlatform}.default;
+in
 {
-  home.packages = with pkgs; [
-    hyprcursor # I guess this has to come separately
-    wl-clipboard # clipboard (why is this additional, like  what?)
-    networkmanagerapplet # brings network manager applet functionality
-    grimblast # screenshot utility
-  ];
+  home.packages =
+    with pkgs;
+    [
+      # hyprcursor # I guess this has to come separately
+      wl-clipboard # clipboard (why is this additional, like  what?)
+      networkmanagerapplet # brings network manager applet functionality
+      grimblast # screenshot utility
+    ]
+    ++ [ upstream-hyprland-hyprcursor ];
 
   # The jummy thing about this is that now as a service it reloads on configurations change automatically!
   wayland.windowManager.hyprland = {
     enable = true;
-    package = nixosConfig.programs.hyprland.package; # match nixos installed
-    # Enabled hyprland-session.target which links to graphical-session.target.
-    # Using this target for other services waiting for the "gui" to start (for example waybar)
+    package = null; # match nixos installed
+    portalPackage = null; # match nixos installe
     systemd.enable = true;
     # main hyprland config in native format
     # extraConfig = builtins.readFile ./hyprland.conf;
@@ -39,6 +47,7 @@
   systemd.user.services.hyprpaper.Unit.After = lib.mkForce "graphical-session.target";
   services.hyprpaper = {
     enable = true;
+    package = pkgs.hyprpaper;
     settings = {
       preload = "${./doom.jpg}";
       wallpaper = ",${./doom.jpg}";

@@ -22,6 +22,10 @@
       url = "github:Alexays/Waybar";
       # inputs.nixpkgs.follows = "nixpkgs"; # consumes more, but will not break OR rebuild when nixpkgs gets updated (often)
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.55.2";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     nvimnix.url = "github:prtzl/nvimnix";
     # nvimnix.url = "/home/matej/projects/git/nvimnix";

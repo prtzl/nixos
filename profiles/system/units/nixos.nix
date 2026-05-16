@@ -58,6 +58,8 @@
         };
       })
       inputs.waybar.overlays.waybar
+      # inputs.hyprland.overlays.hyprland-packages
+      # inputs.hyprland.overlays.hyprland
     ];
   };
 

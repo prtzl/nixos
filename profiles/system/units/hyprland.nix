@@ -1,12 +1,18 @@
 {
   pkgs,
+  inputs,
+  pillow,
   ...
 }:
 
+let
+  upstream-hyprland = inputs.hyprland.packages.${pillow.hostPlatform};
+in
 {
   programs.hyprland = {
     enable = true;
-    package = pkgs.pkgs-unstable.hyprland;
+    package = upstream-hyprland.hyprland;
+    portalPackage = upstream-hyprland.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
 
@@ -33,5 +39,9 @@
     extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   };
 
-  xdg.portal.wlr.enable = true; # enable portals for wlroots-based desktops (hyprland too!)
+  # enable portals
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 }

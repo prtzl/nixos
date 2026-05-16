@@ -44,6 +44,7 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.disko.nixosModules.default
           inputs.nix-monitored.nixosModules.default
+          inputs.hyprland.nixosModules.default
         ]
         ++ (lib.optionals pillow.useDefaults [
           inputs.nvimnix.nixosModules.default
@@ -76,6 +77,9 @@
     let
       homeImports =
         imports
+        ++ [
+          inputs.hyprland.homeManagerModules.default
+        ]
         ++ (lib.optionals pillow.useDefaults [
           inputs.nvimnix.homeManagerModules.default
         ]);

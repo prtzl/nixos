@@ -1,7 +1,6 @@
 {
   lib,
   pillow,
-  pkgs,
   ...
 }:
 
@@ -25,12 +24,6 @@
     ++ lib.optionals (pillow.hasGUI) [
       firefox
       hyprland
-      {
-        xdg.portal = {
-          enable = true;
-          extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-        };
-      }
     ]
     ++ lib.optionals (pillow.onHardware) [
       pipewire
