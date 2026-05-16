@@ -1,12 +1,18 @@
 {
+  pkgs,
+  ...
+}:
+
+{
   programs.starship = {
     enable = true;
+    package = pkgs.pkgs-unstable.starship;
     enableZshIntegration = true;
     settings = {
       command_timeout = 50;
       add_newline = false;
 
-      format = "$username$hostname$directory $git_branch $git_status $nix_shell$fill$cmd_duration$line_break$jobs$character";
+      format = "$username$hostname$directory $shlvl $git_branch $git_status $nix_shell$fill$cmd_duration$line_break$jobs$character";
 
       fill = {
         symbol = " ";
@@ -76,6 +82,13 @@
         show_always = false;
         style_root = "bold red";
         style_user = "bold yellow";
+      };
+
+      shlvl = {
+        disabled = false;
+        format = "[$symbol$shlvl]($style)";
+        symbol = "↕️";
+        threshold = 2;
       };
     };
   };
