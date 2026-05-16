@@ -1,8 +1,8 @@
 {
   lib,
   pkgs,
+  nixosConfig,
   pillow,
-  nixos_config,
   ...
 }:
 
@@ -17,7 +17,7 @@
   # The jummy thing about this is that now as a service it reloads on configurations change automatically!
   wayland.windowManager.hyprland = {
     enable = true;
-    package = nixos_config.programs.hyprland.package; # match nixos installed
+    package = nixosConfig.programs.hyprland.package; # match nixos installed
     # Enabled hyprland-session.target which links to graphical-session.target.
     # Using this target for other services waiting for the "gui" to start (for example waybar)
     systemd.enable = true;

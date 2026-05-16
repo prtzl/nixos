@@ -107,7 +107,7 @@
             pillow = pillow // {
               inherit personal;
             };
-            nixos_config = config;
+            nixosConfig = config;
           }
           // extraSpecialArgs;
         };
