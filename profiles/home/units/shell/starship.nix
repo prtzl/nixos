@@ -12,7 +12,7 @@
       command_timeout = 50;
       add_newline = false;
 
-      format = "$username$hostname$directory $shlvl $git_branch $git_status $nix_shell$fill$cmd_duration$line_break$jobs$character";
+      format = "$username$hostname$directory \${custom.shlvl-tmux}$git_branch$git_status$nix_shell$fill $cmd_duration$line_break$jobs$character";
 
       fill = {
         symbol = " ";
@@ -84,11 +84,11 @@
         style_user = "bold yellow";
       };
 
-      shlvl = {
-        disabled = false;
-        format = "[$symbol$shlvl]($style)";
-        symbol = "↕️";
-        threshold = 2;
+      custom.shlvl-tmux = {
+        when = "ISTM=0; [ -n \"$TMUX\" ] && ISTM=1; d=$((SHLVL - 2 - ISTM)); [ $d -gt 0 ]";
+        command = ''ISTM=0; [ -n "$TMUX" ] && ISTM=1; d=$((SHLVL - 2 - ISTM)); [ $d -gt 0 ] && printf '↕ %d \u200B' "$d";'';
+        format = "[$output]($style)";
+        style = "yellow";
       };
     };
   };
