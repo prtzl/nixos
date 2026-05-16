@@ -42,27 +42,6 @@
 
   system.stateVersion = version;
 
-  nixpkgs = {
-    hostPlatform = "${pillow.hostPlatform}";
-    overlays = [
-      (final: prev: {
-        pkgs-unfree = import inputs.nixpkgs {
-          localSystem = final.stdenv.buildPlatform;
-          hostPlatform = final.stdenv.hostPlatform;
-          config.allowUnfree = true;
-        };
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          localSystem = final.stdenv.buildPlatform;
-          hostPlatform = final.stdenv.hostPlatform;
-          config.allowUnfree = true;
-        };
-      })
-      inputs.waybar.overlays.waybar
-      # inputs.hyprland.overlays.hyprland-packages
-      # inputs.hyprland.overlays.hyprland
-    ];
-  };
-
   # Create group where all members (privileged) have access to /etc/nixos where the config SHOULD be placed
   users.groups.nixos-editors = { };
   systemd.tmpfiles.rules = [

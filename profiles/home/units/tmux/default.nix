@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  pkgs-unstable,
   ...
 }:
 
@@ -35,9 +35,9 @@
 
   programs.sesh = {
     enable = true;
-    package = pkgs.pkgs-unstable.sesh.overrideAttrs (old: rec {
+    package = pkgs-unstable.sesh.overrideAttrs (old: rec {
       version = "2.25.0";
-      src = pkgs.fetchFromGitHub {
+      src = pkgs-unstable.fetchFromGitHub {
         owner = "joshmedeski";
         repo = "sesh";
         rev = "v${version}";

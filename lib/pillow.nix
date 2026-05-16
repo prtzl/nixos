@@ -4,6 +4,19 @@
   version,
 }:
 
+let
+  overlays = [
+    inputs.waybar.overlays.waybar
+    inputs.hyprland.overlays.hyprland-packages
+  ];
+
+  mk-pkgs-unstable =
+    system:
+    import inputs.nixpkgs-unstable {
+      inherit system overlays;
+      config.allowUnfree = true;
+    };
+in
 {
   makePillowArgs =
     {
@@ -37,26 +50,34 @@
       modules,
       specialArgs ? { },
     }:
+    let
+      system = pillow.hostPlatform;
+      pkgs-unstable = mk-pkgs-unstable system;
+    in
     lib.nixosSystem {
-      modules =
-        modules
-        ++ [
-          inputs.home-manager.nixosModules.home-manager
-          inputs.disko.nixosModules.default
-          inputs.nix-monitored.nixosModules.default
-          inputs.hyprland.nixosModules.default
-        ]
-        ++ (lib.optionals pillow.useDefaults [
-          inputs.nvimnix.nixosModules.default
-          inputs.jlink.nixosModules.default
-          ../profiles/system
-        ]);
+      modules = modules ++ [
+        inputs.disko.nixosModules.default
+        inputs.home-manager.nixosModules.home-manager
+        inputs.hyprland.nixosModules.default
+        inputs.jlink.nixosModules.default
+        inputs.nix-monitored.nixosModules.default
+        inputs.nvimnix.nixosModules.default
+        ../profiles/system
+        ({
+
+          nixpkgs = {
+            hostPlatform = "${pillow.hostPlatform}";
+            overlays = [ inputs.waybar.overlays.waybar ];
+          };
+        })
+      ];
 
       specialArgs = specialArgs // {
         inherit
           pillow
           inputs
           version
+          pkgs-unstable
           ;
       };
     };
@@ -75,14 +96,11 @@
     }:
     { config, lib, ... }:
     let
-      homeImports =
-        imports
-        ++ [
-          inputs.hyprland.homeManagerModules.default
-        ]
-        ++ (lib.optionals pillow.useDefaults [
-          inputs.nvimnix.homeManagerModules.default
-        ]);
+      pkgs-unstable = mk-pkgs-unstable pillow.hostPlatform;
+      homeImports = imports ++ [
+        inputs.hyprland.homeManagerModules.default
+        inputs.nvimnix.homeManagerModules.default
+      ];
 
       groupMapping = import ../lib/groupMapping.nix { inherit config lib; };
 
@@ -107,7 +125,7 @@
           };
 
           extraSpecialArgs = {
-            inherit inputs version;
+            inherit inputs version pkgs-unstable;
             pillow = pillow // {
               inherit personal;
             };

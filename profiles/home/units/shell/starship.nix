@@ -1,12 +1,12 @@
 {
-  pkgs,
+  pkgs-unstable,
   ...
 }:
 
 {
   programs.starship = {
     enable = true;
-    package = pkgs.pkgs-unstable.starship;
+    package = pkgs-unstable.starship;
     enableZshIntegration = true;
     settings = {
       command_timeout = 50;

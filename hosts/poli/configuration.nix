@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }:
 
@@ -43,10 +44,10 @@ in
     openrazer.enable = true;
     graphics = {
       enable = true;
-      package = pkgs.pkgs-unstable.mesa;
-      package32 = pkgs.pkgs-unstable.pkgsi686Linux.mesa;
+      package = pkgs-unstable.mesa;
+      package32 = pkgs-unstable.pkgsi686Linux.mesa;
     };
-    graphics.extraPackages = with pkgs.pkgs-unstable; [
+    graphics.extraPackages = with pkgs-unstable; [
       intel-media-driver
       intel-vaapi-driver
       mesa
