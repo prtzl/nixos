@@ -2,7 +2,6 @@
   lib,
   pkgs,
   nixosConfig,
-  pillow,
   ...
 }:
 
@@ -22,17 +21,18 @@
     # Using this target for other services waiting for the "gui" to start (for example waybar)
     systemd.enable = true;
     # main hyprland config in native format
-    extraConfig = builtins.readFile ./hyprland.conf;
+    # extraConfig = builtins.readFile ./hyprland.conf;
+    extraConfig = builtins.readFile ./hyprland.lua;
     # hyprland config in nix format - programmable part
-    settings =
-      let
-        defaultSettings = {
-          monitor = lib.mkDefault [ ",preferred,auto,1" ];
-        };
-        userSettings = pillow.settings;
-        hyprlandSettings = if (userSettings ? hyprland) then userSettings.hyprland else { };
-      in
-      defaultSettings // hyprlandSettings;
+    # settings =
+    #   let
+    #     defaultSettings = {
+    #       monitor = lib.mkDefault [ ",preferred,auto,1" ];
+    #     };
+    #     userSettings = pillow.settings;
+    #     hyprlandSettings = if (userSettings ? hyprland) then userSettings.hyprland else { };
+    #   in
+    #   defaultSettings // hyprlandSettings;
   };
 
   # Background setting app
