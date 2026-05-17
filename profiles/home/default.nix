@@ -88,10 +88,6 @@
       xfce.thunar
       xfce.thunar-archive-plugin
       xfce.tumbler
-
-      # wine
-      wineWowPackages.waylandFull
-      winetricks
     ]
     ++ lib.optionals pillow.onHardware [
       monitorets # GUI for temperature sensors
