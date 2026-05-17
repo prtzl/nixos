@@ -1,5 +1,6 @@
 {
   lib,
+  extraModules ? [ ],
   ...
 }:
 
@@ -35,11 +36,14 @@ lib.pillowSystem rec {
     };
   };
 
-  modules = (lib.findModulesList ./.) ++ [
-    (import ../../users/matej {
-      inherit lib pillow;
-    })
-  ];
+  modules =
+    extraModules
+    ++ (lib.findModulesList ./.)
+    ++ [
+      (import ../../users/matej {
+        inherit lib pillow;
+      })
+    ];
 
   specialArgs = {
   };

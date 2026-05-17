@@ -1,10 +1,11 @@
 {
   lib,
+  extraModules ? [ ],
   ...
 }:
 
 let
-  extraModules = with lib.findModules ../../profiles/system/units/virtualization; [ container ];
+  extraModulesLocal = with lib.findModules ../../profiles/system/units/virtualization; [ container ];
 in
 lib.pillowSystem rec {
   pillow = lib.makePillowArgs {
@@ -21,13 +22,14 @@ lib.pillowSystem rec {
   };
 
   modules =
-    (lib.findModulesList ./.)
+    extraModules
+    ++ extraModulesLocal
+    ++ (lib.findModulesList ./.)
     ++ [
       (import ../../users/nixos {
         inherit lib pillow;
       })
-    ]
-    ++ extraModules;
+    ];
 
   specialArgs = {
   };

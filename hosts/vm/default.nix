@@ -1,5 +1,6 @@
 {
   lib,
+  extraModules ? [ ],
   ...
 }:
 
@@ -25,14 +26,17 @@ lib.pillowSystem rec {
     };
   };
 
-  modules = (lib.findModulesList ./.) ++ [
-    (import ../../users/macho {
-      inherit lib pillow;
-    })
-    (import ../../users/nacho {
-      inherit lib pillow;
-    })
-  ];
+  modules =
+    extraModules
+    ++ (lib.findModulesList ./.)
+    ++ [
+      (import ../../users/macho {
+        inherit lib pillow;
+      })
+      (import ../../users/nacho {
+        inherit lib pillow;
+      })
+    ];
 
   specialArgs = {
   };

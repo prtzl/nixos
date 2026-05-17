@@ -46,6 +46,7 @@
       lib = import ./lib { inherit inputs version; };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
+
       flake = {
         nixosConfigurations = lib.collectHosts;
       };
@@ -56,13 +57,15 @@
         { pkgs, system, ... }:
         let
           disko-pkg = disko.packages.${system}.default;
+          installers = lib.collectInstallers;
         in
         {
           formatter = pkgs.nixfmt-tree;
 
           packages = {
             disko = disko-pkg;
-          };
+          }
+          // installers;
 
           devShells.default = pkgs.mkShellNoCC {
             buildInputs = [ disko-pkg ];

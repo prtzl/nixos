@@ -4,14 +4,14 @@
 }:
 
 let
-  hostDirs = builtins.filter (n: (builtins.readDir ./../hosts)."${n}" == "directory") (
+  hosts = builtins.filter (n: (builtins.readDir ./../hosts)."${n}" == "directory") (
     builtins.attrNames (builtins.readDir ./../hosts)
   );
 
   mkHost =
-    name:
-    import (./../hosts + "/${name}") {
+    host:
+    import (./../hosts + "/${host}") {
       inherit lib inputs;
     };
 in
-lib.genAttrs hostDirs mkHost
+lib.genAttrs hosts mkHost

@@ -17,7 +17,11 @@ inputs.nixpkgs.lib.extend (
       lib = final;
       inherit inputs;
     };
+    collectInstallers = import ./collect-installers.nix {
+      lib = final;
+      inherit inputs;
+    };
     utils = import ./utils.nix { lib = final; };
   in
-  pillow // { inherit collectHosts; } // utils
+  pillow // { inherit collectHosts collectInstallers; } // utils
 )
