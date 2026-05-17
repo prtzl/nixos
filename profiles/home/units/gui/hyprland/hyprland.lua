@@ -195,7 +195,7 @@ hl.window_rule({
 
 hl.window_rule({
   match = {
-    class = "Enpass title:Enpass Assistant",
+    class = "Enpass",
   },
   float = true,
 })
@@ -218,21 +218,21 @@ hl.window_rule({
 
 hl.window_rule({
   match = {
-    class = "class:org.pulseaudio.pavucontrol",
+    class = "org.pulseaudio.pavucontrol",
   },
   min_size = { 1024, 512 },
 })
 
 hl.window_rule({
   match = {
-    class = "class:Alacritty",
+    class = "Alacritty",
   },
   opacity = "0.9 0.8",
 })
 
 hl.window_rule({
   match = {
-    class = "class:thunar",
+    class = "thunar",
   },
   opacity = "0.9 0.8",
 })
