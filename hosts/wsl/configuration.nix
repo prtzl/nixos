@@ -1,12 +1,12 @@
 {
-  pillow,
+  inputs,
   pkgs,
   ...
 }:
 
 {
   imports = [
-    <nixos-wsl/modules>
+    inputs.nixos-wsl.nixosModules.default
     ./usbipd.nix
   ];
 
