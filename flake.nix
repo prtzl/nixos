@@ -1,12 +1,12 @@
 {
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+  inputs = rec {
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs = nixpkgs-unstable; # "github:nixos/nixpkgs/nixos-25.11";
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     disko = {
       url = "github:nix-community/disko";
@@ -39,7 +39,7 @@
   outputs =
     inputs@{ flake-parts, disko, ... }:
     let
-      version = "25.11";
+      version = "26.05";
       lib = import ./lib { inherit inputs version; };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {

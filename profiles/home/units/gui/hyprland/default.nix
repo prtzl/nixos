@@ -21,9 +21,10 @@
     package = null; # match nixos installed
     portalPackage = null; # match nixos installe
     systemd.enable = true;
+    configType = "lua";
     # main hyprland config in native format
     # extraConfig = builtins.readFile ./hyprland.conf;
-    # extraConfig = builtins.readFile ./hyprland.lua;
+    extraConfig = builtins.readFile ./hyprland.lua;
     # hyprland config in nix format - programmable part
     # settings =
     #   let
