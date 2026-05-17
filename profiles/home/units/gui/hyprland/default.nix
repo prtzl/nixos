@@ -1,15 +1,15 @@
 {
   lib,
   pillow,
-  pkgs-unstable,
+  pkgs,
   ...
 }:
 
-# INFO: use pkgs-unstable since that's overriden by hyprland upstream flake along with all of it's related packages
+# INFO: use pkgs since that's overriden by hyprland upstream flake along with all of it's related packages
 # Therefore hyprcursor, for example, will come from there and will thus depend on hyprland from upstream instead
 # of using one from nixpkgs.
 {
-  home.packages = with pkgs-unstable; [
+  home.packages = with pkgs; [
     hyprcursor # I guess this has to come separately
     wl-clipboard # clipboard (why is this additional, like  what?)
     networkmanagerapplet # brings network manager applet functionality
@@ -47,7 +47,7 @@
   systemd.user.services.hyprpaper.Unit.After = lib.mkForce "graphical-session.target";
   services.hyprpaper = {
     enable = true;
-    package = pkgs-unstable.hyprpaper;
+    package = pkgs.hyprpaper;
     settings = { };
   };
   # INFO: exporter does not put monitor at the top, so hyprpaper complains
@@ -68,7 +68,7 @@
     ConditionEnvironment = lib.mkForce "";
   };
   services.wlsunset = {
-    package = pkgs-unstable.wlsunset;
+    package = pkgs.wlsunset;
     enable = true;
     temperature.day = 4001;
     temperature.night = 4000;

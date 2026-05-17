@@ -1,12 +1,11 @@
 {
-  inputs = rec {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs = nixpkgs-unstable; # "github:nixos/nixpkgs/nixos-25.11";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
       url = "github:nix-community/disko";
@@ -24,7 +23,7 @@
     };
     hyprland = {
       url = "github:hyprwm/Hyprland/v0.55.2";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nvimnix.url = "github:prtzl/nvimnix";
@@ -32,7 +31,7 @@
     jlink = {
       url = "github:prtzl/jlink-nix";
       # url = "/home/matej/projects/git/jlink-nix/master";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

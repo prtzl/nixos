@@ -1,11 +1,11 @@
 {
   lib,
-  pkgs-unstable,
+  pkgs,
   ...
 }:
 
 let
-  pkgs-steam = pkgs-unstable;
+  pkgs-steam = pkgs;
 in
 {
   # Allow steam specifically

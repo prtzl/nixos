@@ -10,9 +10,9 @@ let
     inputs.hyprland.overlays.hyprland-packages
   ];
 
-  mk-pkgs-unstable =
+  mk-pkgs-unfree =
     system:
-    import inputs.nixpkgs-unstable {
+    import inputs.nixpkgs {
       inherit system overlays;
       config.allowUnfree = true;
     };
@@ -52,7 +52,7 @@ in
     }:
     let
       system = pillow.hostPlatform;
-      pkgs-unstable = mk-pkgs-unstable system;
+      pkgs-unfree = mk-pkgs-unfree system;
     in
     lib.nixosSystem {
       modules = modules ++ [
@@ -64,10 +64,9 @@ in
         inputs.nvimnix.nixosModules.default
         ../profiles/system
         ({
-
           nixpkgs = {
             hostPlatform = "${pillow.hostPlatform}";
-            overlays = [ inputs.waybar.overlays.waybar ];
+            overlays = overlays;
           };
         })
       ];
@@ -77,7 +76,7 @@ in
           pillow
           inputs
           version
-          pkgs-unstable
+          pkgs-unfree
           ;
       };
     };
@@ -96,7 +95,7 @@ in
     }:
     { config, lib, ... }:
     let
-      pkgs-unstable = mk-pkgs-unstable pillow.hostPlatform;
+      pkgs-unfree = mk-pkgs-unfree pillow.hostPlatform;
       homeImports = imports ++ [
         inputs.hyprland.homeManagerModules.default
         inputs.nvimnix.homeManagerModules.default
@@ -125,7 +124,7 @@ in
           };
 
           extraSpecialArgs = {
-            inherit inputs version pkgs-unstable;
+            inherit inputs version pkgs-unfree;
             pillow = pillow // {
               inherit personal;
             };

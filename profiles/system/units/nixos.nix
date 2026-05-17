@@ -1,6 +1,5 @@
 {
   inputs,
-  pillow,
   version,
   ...
 }:
@@ -12,9 +11,8 @@
       notify = false;
     };
     registry = {
-      # nixpkgs (default) == stable branch (my default)
-      stable.flake = inputs.nixpkgs;
-      unstable.flake = inputs.nixpkgs-unstable;
+      # nixpkgs (default)
+      unfree.flake = inputs.nixpkgs;
       master.to = {
         owner = "nixos";
         repo = "nixpkgs";

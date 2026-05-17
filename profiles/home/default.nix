@@ -3,7 +3,7 @@
   lib,
   pillow,
   pkgs,
-  pkgs-unstable,
+  pkgs-unfree,
   version,
   ...
 }:
@@ -52,7 +52,7 @@
           version = "6.11.13.1957";
           sha256 = "2d8c90643851591aff41057b380a7e87bb839bf5c5aa0ca1456144e9996c902a";
         in
-        pkgs-unstable.enpass.overrideAttrs (old: {
+        pkgs.enpass.overrideAttrs (old: {
           inherit version;
           src = builtins.fetchurl {
             inherit sha256 url;
@@ -70,7 +70,7 @@
       transmission_4-gtk
 
       # Utility
-      pkgs-unstable.enpass # my-enpass
+      pkgs-unfree.enpass # my-enpass
       qalculate-gtk # calculator fyi
       gnome-disk-utility
 
