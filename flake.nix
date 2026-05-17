@@ -50,8 +50,19 @@
 
       perSystem =
         { pkgs, system, ... }:
+        let
+          disko = disko.packages.${system}.default;
+        in
         {
-          packages.disko = disko.packages.${system}.default;
+          formatter = pkgs.nixfmt-tree;
+
+          packages = {
+            inherit disko;
+          };
+
+          devShells.default = pkgs.mkShellNoCC {
+            buildInputs = [ disko ];
+          };
         };
     };
 }
