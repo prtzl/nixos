@@ -85,9 +85,9 @@
       gthumb # image viewer
 
       # file explorer
-      xfce.thunar
-      xfce.thunar-archive-plugin
-      xfce.tumbler
+      thunar
+      thunar-archive-plugin
+      tumbler
     ]
     ++ lib.optionals pillow.onHardware [
       monitorets # GUI for temperature sensors

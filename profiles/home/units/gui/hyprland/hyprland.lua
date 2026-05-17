@@ -20,13 +20,12 @@
 --###############
 
 -- See https://wiki.hyprland.org/Configuring/Monitors/
--- monitor=,1920x1080@60,auto,1
-hl.monitor({
-  output = "",
-  mode = "preferred",
-  position = "auto",
-  scale = "1",
-})
+-- hl.monitor({
+--   output = "",
+--   mode = "preferred",
+--   position = "auto",
+--   scale = "1",
+-- })
 
 --##################
 --## MY PROGRAMS ###
@@ -46,8 +45,6 @@ local calculator = "qalculate-gtk"
 --################
 
 hl.on("hyprland.start", function()
-  hl.exec_cmd(
-  "/nix/store/99nasl1d5rzdqpkxiszg28ck7g17i24a-dbus-1.14.10/bin/dbus-update-activation-environment --systemd DISPLAY HYPRLAND_INSTANCE_SIGNATURE WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user stop hyprland-session.target && systemctl --user start hyprland-session.target")
   hl.exec_cmd("Enpass -minimize")
   hl.exec_cmd("signal-desktop --start-in-tray")
   hl.exec_cmd("nm-applet")
@@ -213,11 +210,10 @@ hl.window_rule({
 hl.window_rule({
   match = {
     class = "thunar",
-    -- name = "Rename.*", -- TODO: check
+    title = "Rename",
   },
   float = true,
   center = true,
-  -- focus = true,
 })
 
 hl.window_rule({
@@ -231,14 +227,14 @@ hl.window_rule({
   match = {
     class = "class:Alacritty",
   },
-  opacity = "0.9 override 0.8 override",
+  opacity = "0.9 0.8",
 })
 
 hl.window_rule({
   match = {
     class = "class:thunar",
   },
-  opacity = "0.9 override 0.8 override",
+  opacity = "0.9 0.8",
 })
 
 hl.config({

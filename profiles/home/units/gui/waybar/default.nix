@@ -226,7 +226,7 @@ in
     enable = true;
     package = pkgs.waybar;
     systemd.enable = true;
-    systemd.target = "hyprland-session.target";
+    # systemd.target = "hyprland-session.target";
     settings = [ config ];
     style = style;
   };

@@ -1,5 +1,6 @@
 {
   lib,
+  pillow,
   pkgs-unstable,
   ...
 }:
@@ -26,15 +27,20 @@
     # extraConfig = builtins.readFile ./hyprland.conf;
     extraConfig = builtins.readFile ./hyprland.lua;
     # hyprland config in nix format - programmable part
-    # settings =
-    #   let
-    #     defaultSettings = {
-    #       monitor = lib.mkDefault [ ",preferred,auto,1" ];
-    #     };
-    #     userSettings = pillow.settings;
-    #     hyprlandSettings = if (userSettings ? hyprland) then userSettings.hyprland else { };
-    #   in
-    #   defaultSettings // hyprlandSettings;
+    settings =
+      let
+        defaultSettings = {
+          monitor = lib.mkDefault {
+            output = "";
+            mode = "preferred";
+            position = "auto";
+            scale = "1";
+          };
+        };
+        userSettings = pillow.settings;
+        hyprlandSettings = if (userSettings ? hyprland) then userSettings.hyprland else { };
+      in
+      defaultSettings // hyprlandSettings;
   };
 
   # Background setting app
