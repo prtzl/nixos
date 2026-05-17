@@ -44,7 +44,7 @@
   home.packages =
     let
       # One on unstable version (6.11.6.183) has issue downloading the resource. Go for newest.
-      my-enpass =
+      _my-enpass =
         let
           baseUrl = "https://apt.enpass.io";
           path = "pool/main/e/enpass/enpass_6.11.13.1957_amd64.deb";
