@@ -1,16 +1,19 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,18 +23,23 @@
       url = "github:ners/nix-monitored";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
+
     waybar = {
       url = "github:Alexays/Waybar";
       # inputs.nixpkgs.follows = "nixpkgs"; # consumes more, but will not break OR rebuild when nixpkgs gets updated (often)
     };
+
     hyprland = {
       url = "github:hyprwm/Hyprland/v0.55.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Mine
     nvimnix.url = "github:prtzl/nvimnix";
     # nvimnix.url = "/home/matej/projects/git/nvimnix";
+
     jlink = {
       url = "github:prtzl/jlink-nix";
       # url = "/home/matej/projects/git/jlink-nix/master";
