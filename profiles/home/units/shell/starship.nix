@@ -53,7 +53,7 @@
         conflicted = "[](bold red)";
         deleted = "[](bold red)";
         diverged = "⇕⇡($ahead_count)⇣($behind_count)";
-        format = "[\\[[$ahead_behind](bold green)[$all_status]($style)\\]]($style)";
+        format = "[\\[[$ahead_behind](bold green)[$all_status]($style)\\] ]($style)";
         modified = "[󰷈](bold yellow)";
         renamed = "[](bold cyan)";
         staged = "[+](bold green)";
