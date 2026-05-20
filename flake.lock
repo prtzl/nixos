@@ -695,11 +695,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1779305500,
-        "narHash": "sha256-7Le0mBQRDaMxwRdmwuOaLysmd1kTQYhVyLAaC7o3oQ8=",
+        "lastModified": 1779312223,
+        "narHash": "sha256-PBqK9eHR7ql+10W6Uqp4I0QMGItbqUV7EaRO674Lsfc=",
         "owner": "prtzl",
         "repo": "nvimnix",
-        "rev": "00c3fdbc0deed35b0acf34de1fbb331c500de8e2",
+        "rev": "3672defba3151f235199822c38e3627d1b94bc20",
         "type": "github"
       },
       "original": {
