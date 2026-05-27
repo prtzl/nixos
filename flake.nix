@@ -28,7 +28,7 @@
 
     waybar = {
       url = "github:Alexays/Waybar";
-      # inputs.nixpkgs.follows = "nixpkgs"; # consumes more, but will not break OR rebuild when nixpkgs gets updated (often)
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
