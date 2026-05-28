@@ -1,6 +1,7 @@
 {
   config,
   myShell,
+  pillow,
   ...
 }:
 
@@ -17,6 +18,16 @@
 
     shellAliases = myShell.aliases;
 
-    initExtra = myShell.posixInit + "";
+    initExtra =
+      myShell.posixInit
+      + (
+        if pillow.edition == "wsl" then
+          ''
+            complete -o default -o nospace -F _git wslgit
+            complete -o default -o nospace -F _longopt eza
+          ''
+        else
+          ""
+      );
   };
 }
