@@ -12,7 +12,7 @@
     autocd = false;
     autosuggestion.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
-    enableCompletion = false; # do it manually
+    enableCompletion = true;
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -31,7 +31,7 @@
 
     initContent = myShell.posixInit + ''
       autoload -U colors && colors      # colors
-      autoload -U cominit colors zcalc  # theming
+      autoload -U compinit colors zcalc  # theming
 
       # Tab completion
       autoload -Uz compinit
