@@ -10,8 +10,8 @@ let
     aliases = {
       # shell utils
       ls = "eza --group-directories-first --icons";
-      l = "eza -lag  --group-directories-first --icons --git";
-      ll = "eza -lg  --group-directories-first --icons --git";
+      l = "eza -lag  --group-directories-first --icons";
+      ll = "eza -lg  --group-directories-first --icons";
       xclip = "xclip -selection clipboard";
       rg = "rg -S --color=auto"; # I would like smart case normally for ripgrep
       df = "df -h"; # human readable units
