@@ -86,7 +86,7 @@ in
     {
       imports,
       name,
-      initialHashedPassword ? null,
+      initialPassword ? null,
       extraGroups ? [ ],
       extraSpecialArgs ? { },
       # since this is for me I want sensible defaults for me
@@ -134,9 +134,8 @@ in
         };
 
         users.users.${name} = {
+          inherit initialPassword;
           extraGroups = allGroups;
-          initialPassword = ""; # user not asked for one, only for live boot (not working for ssh or su or sudo)
-          initialHashedPassword = initialHashedPassword;
           isNormalUser = true;
         };
       };
