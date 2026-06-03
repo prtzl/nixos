@@ -43,6 +43,7 @@
         ripgrep # modern grep
         sd # modern sed (handles escapes like rg automatically)
         tldr # man, but faster for finding usage
+        unzip # hello?
         vim # backup, always nice
         wget # get web, he he
       ]
