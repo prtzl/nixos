@@ -61,12 +61,6 @@
 
   # Screen color without affecting screenshot/screenrecording SW
   # One of the two following entries (units or restart) makes this work now. There is a race condition that makes the wlsunset start before the wayland is really up
-  systemd.user.services.wlsunset.Unit = {
-    After = lib.mkForce [ "hyprland-session.target" ];
-    Wants = [ "hyprland-session.target" ];
-
-    ConditionEnvironment = lib.mkForce "";
-  };
   services.wlsunset = {
     package = pkgs.wlsunset;
     enable = true;
