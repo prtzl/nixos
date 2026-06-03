@@ -30,8 +30,26 @@ lib.pillowSystem rec {
     };
     settings.hyprland = {
       bind = [
-        ", XF86MonBrightnessUp, exec, mybrightness up"
-        ", XF86MonBrightnessDown, exec, mybrightness down"
+        {
+          _args = [
+            "XF86MonBrightnessUp"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"mybrightness up\")")
+            {
+              locked = true;
+              repeating = true;
+            }
+          ];
+        }
+        {
+          _args = [
+            "XF86MonBrightnessDown"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"mybrightness down\")")
+            {
+              locked = true;
+              repeating = true;
+            }
+          ];
+        }
       ];
     };
   };
