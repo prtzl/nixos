@@ -1,18 +1,13 @@
 {
   pkgs,
-  inputs,
-  pillow,
   ...
 }:
 
-let
-  upstream-hyprland = inputs.hyprland.packages.${pillow.hostPlatform};
-in
 {
+  # should be overlayed anyways + module
   programs.hyprland = {
     enable = true;
-    package = upstream-hyprland.hyprland;
-    portalPackage = upstream-hyprland.xdg-desktop-portal-hyprland;
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
 
