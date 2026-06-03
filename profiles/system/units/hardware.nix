@@ -15,27 +15,6 @@
       };
       efi.canTouchEfiVariables = lib.mkDefault true;
     };
-    # Following nonsense with plymouth is to enable startup animation
-    # Silent boot
-    consoleLogLevel = 3;
-    initrd.verbose = false;
-    # loader.timeout = 0;
-    kernelParams = [
-      "boot.shell_on_fail"
-      "quiet"
-      "rd.systemd.show_status=auto"
-      "splash"
-      "udev.log_level=3"
-    ];
-    plymouth = {
-      enable = true;
-      theme = "rings";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "rings" ];
-        })
-      ];
-    };
   };
 
   hardware = {
