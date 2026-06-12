@@ -44,7 +44,7 @@
   };
 
   # Background setting app
-  systemd.user.services.hyprpaper.Unit.After = lib.mkForce "graphical-session.target";
+  systemd.user.services.hyprpaper.Unit.After = lib.mkForce "hyprland-session.target";
   services.hyprpaper = {
     enable = true;
     package = pkgs.hyprpaper;
