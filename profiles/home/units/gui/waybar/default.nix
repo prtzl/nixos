@@ -221,12 +221,14 @@ in
     pavucontrol # used to adjust volume with applet. Yes, usefull on it's own, but manly used via applet, so we require it here
   ];
 
-  systemd.user.services.waybar.Unit.After = lib.mkForce "graphical-session.target";
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
-    systemd.enable = true;
-    # systemd.target = "hyprland-session.target";
+    systemd = {
+      enable = true;
+      # only way it starts up nicely. I can "hard-code" this for myself
+      targets = [ "hyprland-session.target" ];
+    };
     settings = [ config ];
     style = style;
   };
