@@ -26,10 +26,15 @@
 
         "default.clock.rate" = 44100;
         "default.clock.allowed-rates" = [
+          16000
+          22050
+          32000
           44100
           48000
           88200
           96000
+          176400
+          192000
         ];
 
         "default.clock.quantum" = 512; # ~10.64mn latency
