@@ -80,5 +80,6 @@ in
   environment.systemPackages = with pkgs; [
     arduino
     rsync
+    tauon
   ];
 }
