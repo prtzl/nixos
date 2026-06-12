@@ -25,6 +25,7 @@
       gui
     ]
     ++ lib.optionals (pillow.onHardware) [
+      solaar
       tio
     ];
 
