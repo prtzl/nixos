@@ -63,6 +63,7 @@
   # One of the two following entries (units or restart) makes this work now. There is a race condition that makes the wlsunset start before the wayland is really up
   services.wlsunset = {
     package = pkgs.wlsunset;
+    systemdTarget = "hyprland-session.target";
     enable = true;
     temperature.day = 4001;
     temperature.night = 4000;
