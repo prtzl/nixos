@@ -208,3 +208,4 @@ hl.window_rule({ match = { class = "thunar", title = "Rename", }, float = true, 
 hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol", }, min_size = { 1024, 512 }, })
 hl.window_rule({ match = { class = "Alacritty", }, opacity = "0.9", })
 hl.window_rule({ match = { class = "thunar", }, opacity = "0.9", })
+hl.window_rule({ match = { class = "tauonmb", }, opacity = "0.9", })
