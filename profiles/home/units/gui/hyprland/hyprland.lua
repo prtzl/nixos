@@ -63,6 +63,10 @@ hl.config({
     allow_tearing = false,
   },
 
+  dwindle = {
+    preserve_split = true,
+  },
+
   decoration = {
     rounding = 5,
     active_opacity = 1.0,
