@@ -130,15 +130,13 @@ hl.bind(mainMod .. " + l", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + e", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + SHIFT + f", hl.dsp.window.fullscreen(""))
 hl.bind(mainMod .. " + f", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + s", hl.dsp.layout("togglesplit"))
-hl.bind("PRINT",
+hl.bind(mainMod .. " + apostrophe", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. "+ s",
   hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copysave screen -o " ..
     "$HOME" .. "/Pictures/Screenshot/$(date +'%Y-%m-%d-%H%M%S')_screenshot.png"))
-hl.bind("CTRL + PRINT", hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copy screen"))
-hl.bind("SHIFT + PRINT",
+hl.bind(mainMod .. "+ SHIFT + s",
   hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copysave area -o " ..
     "$HOME" .. "/Pictures/Screenshot/$(date +'%Y-%m-%d-%H%M%S')_screenshot.png"))
-hl.bind("CTRL + SHIFT + PRINT", hl.dsp.exec_cmd("grimblast -n -e 3000 -t png copy area"))
 
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
