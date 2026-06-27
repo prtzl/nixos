@@ -1,3 +1,5 @@
+INCREMENT=5
+
 command=${1:-""}
 
 function muted()
@@ -7,12 +9,12 @@ function muted()
 
 # Check the passed argument for Volume Up or Volume Down
 if [ "$command" == "up" ]; then
-    wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+
+    wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ "$INCREMENT"%+
     if [[ -n "$(muted)" ]]; then
         wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
     fi
 elif [ "$command" == "down" ]; then
-    wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%-
+    wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ "$INCREMENT"%-
     if [[ -n "$(muted)" ]]; then
         wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
     fi
