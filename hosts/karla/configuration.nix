@@ -81,7 +81,10 @@
     # Following line fixed missing drivers for the wireless card when upgrading from 24.11 to 25.05.
     enableRedistributableFirmware = true;
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
     acpilight.enable = true;
   };
 

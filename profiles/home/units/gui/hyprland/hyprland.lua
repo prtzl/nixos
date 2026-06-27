@@ -211,3 +211,4 @@ hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol", }, min_size = {
 hl.window_rule({ match = { class = "Alacritty", }, opacity = "0.9", })
 hl.window_rule({ match = { class = "thunar", }, opacity = "0.9", })
 hl.window_rule({ match = { class = "tauonmb", }, opacity = "0.9", })
+hl.window_rule({ match = { class = ".blueman-manager-wrapped", }, float = true, })

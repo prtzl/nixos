@@ -51,6 +51,18 @@ lib.pillowSystem rec {
           ];
         }
       ];
+      on = [
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline ''
+              function()
+                hl.exec_cmd("blueman-applet")
+              end
+            '')
+          ];
+        }
+      ];
     };
   };
 
