@@ -30,17 +30,7 @@
     ];
 
   home.stateVersion = version;
-  # programs.nvimnix.enable = true; # my nvim always use
-
-  programs.vim = {
-    enable = true;
-    extraConfig = ''
-      set viminfo=%,'1000,<500,s100,h,n~/.local/state/vim/viminfo
-    '';
-  };
-  home.activation.createVimHistoryDir = ''
-    mkdir -p ${config.xdg.stateHome}/vim
-  '';
+  home.preferXdgDirectories = true;
 
   home.packages =
     let
@@ -93,6 +83,50 @@
     ++ lib.optionals pillow.onHardware [
       monitorets # GUI for temperature sensors
     ];
+
+  xdg = {
+    enable = true;
+
+    # dataHome = "~/.local/share";
+    # stateHome = "~/.local/state";
+    # cacheHome = "~/.cache";
+    # configHome = "~/.config";
+
+    mime = {
+      enable = true;
+    };
+    mimeApps = {
+      enable = true;
+
+      defaultApplications = {
+        # "application/pdf" = "org.pwmt.zathura-pdf.desktop";
+      };
+    };
+
+    # systemDirs = {
+    #   data = [
+    #     "/usr/share"
+    #     "/usr/local/share"
+    #   ];
+    #
+    #   config = [ "/etc/xdg" ];
+    # };
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+  };
+
+  programs.vim = {
+    enable = true;
+    extraConfig = ''
+      set viminfo=%,'1000,<500,s100,h,n~/.local/state/vim/viminfo
+    '';
+  };
+  home.activation.createVimHistoryDir = ''
+    mkdir -p ${config.xdg.stateHome}/vim
+  '';
 
   # python: Don't put python dotshit into home
   home.sessionVariables = {

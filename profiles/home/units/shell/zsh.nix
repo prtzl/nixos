@@ -6,16 +6,26 @@
 }:
 
 {
-  xdg.enable = true;
+  xdg.enable = true; # just to make sure, since it's used here
+
+  # if it doesn't exist, then compinit will put it into wherever .zshrc is and all links to .cache/zsh will be wrong
+  # then compinit re-builds it every time and never uses it ... huh
+  home.activation.createZshCacheDir = ''
+    mkdir -p ${config.xdg.cacheHome}/zsh
+  '';
+  # same story
+  home.activation.createZshStateDir = ''
+    mkdir -p ${config.xdg.stateHome}/zsh
+  '';
 
   programs.zsh = {
     enable = true;
     autocd = false;
     autosuggestion.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
-    enableCompletion = true;
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
+    enableCompletion = false; # do it myself
 
     shellAliases = myShell.aliases;
 
@@ -33,19 +43,27 @@
     initContent =
       myShell.posixInit
       + ''
-        autoload -U colors && colors      # colors
-        autoload -U compinit colors zcalc  # theming
+        autoload -U colors
+        colors
 
         # Tab completion
         autoload -Uz compinit
-        compinit -d "${config.xdg.cacheHome}/zsh/.zcompdump"
+        compinit -C -u -d "${config.xdg.cacheHome}/zsh/.zcompdump"
 
         zstyle ':completion:*' menu select=1
-        zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' # Case insensitive tab completion
-        zstyle ':completion:*' list-colors "''${(s.:.)--color=auto}"                      # Colored completion (different colors for dirs/files/etc)
         zstyle ':completion:*' rehash true                                                # automatically find new executables in path
         zstyle ':completion:*' use-cache on
         zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh"
+
+        # first try the usual completion and, if nothing matches, to try a case-insensitive completion
+        # also try to complete partial words you’ve typed
+        zstyle ':completion:*' matcher-list "" "m:{a-zA-Z}={A-Za-z}" "r:|[._-]=* r:|=*" "l:|=* r:|=*"
+        # completing for an option
+        zstyle ':completion:*' complete-options true
+        # // is expanded to /
+        zstyle ':completion:*' squeeze-slashes true
+        # colors :D
+        zstyle ':completion:*:default' list-colors ''${(s.:.)LS_COLORS}
 
         # Color man pages
         export LESS_TERMCAP_mb=$'\E[01;32m'
