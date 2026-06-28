@@ -35,6 +35,7 @@
 
   programs.sesh = {
     enable = true;
+    # TODO: next time tell myself why I went with this version? Newer or older (something broke?)
     package = pkgs.sesh.overrideAttrs (old: rec {
       version = "2.25.0";
       src = pkgs.fetchFromGitHub {
@@ -49,7 +50,12 @@
     fzfPackage = config.programs.fzf.package;
     enableTmuxIntegration = false; # customize my tmux prompt upstairs
     settings = {
-      import = [ "${config.xdg.stateHome}/sesh/sesh-local.toml" ]; # this has to exist!
+      import = [ "${config.xdg.stateHome}/sesh/sesh-local.toml" ]; # this has to exist! -> look down
     };
   };
+
+  home.activation.createSeshConfig = ''
+    mkdir -p ${config.xdg.stateHome}/sesh
+    touch ${config.xdg.stateHome}/sesh/sesh-local.toml
+  '';
 }
