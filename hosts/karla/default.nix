@@ -28,41 +28,46 @@ lib.pillowSystem rec {
         "BAT0"
       ];
     };
-    settings.hyprland = {
-      bind = [
-        {
-          _args = [
-            "XF86MonBrightnessUp"
-            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"mybrightness up\")")
-            {
-              locked = true;
-              repeating = true;
-            }
-          ];
-        }
-        {
-          _args = [
-            "XF86MonBrightnessDown"
-            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"mybrightness down\")")
-            {
-              locked = true;
-              repeating = true;
-            }
-          ];
-        }
-      ];
-      on = [
-        {
-          _args = [
-            "hyprland.start"
-            (lib.generators.mkLuaInline ''
-              function()
-                hl.exec_cmd("blueman-applet")
-              end
-            '')
-          ];
-        }
-      ];
+    settings = {
+      virtualisation.enable = false; # don't enable it on poor laptop
+      containers.podman.enable = false; # don't enable it on poor laptop
+      containers.docker.enable = false; # don't enable it on poor laptop
+      hyprland = {
+        bind = [
+          {
+            _args = [
+              "XF86MonBrightnessUp"
+              (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"mybrightness up\")")
+              {
+                locked = true;
+                repeating = true;
+              }
+            ];
+          }
+          {
+            _args = [
+              "XF86MonBrightnessDown"
+              (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"mybrightness down\")")
+              {
+                locked = true;
+                repeating = true;
+              }
+            ];
+          }
+        ];
+        on = [
+          {
+            _args = [
+              "hyprland.start"
+              (lib.generators.mkLuaInline ''
+                function()
+                  hl.exec_cmd("blueman-applet")
+                end
+              '')
+            ];
+          }
+        ];
+      };
     };
   };
 

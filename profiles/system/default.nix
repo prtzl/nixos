@@ -13,14 +13,8 @@
       findre
       nixos
       update
+      virtualization
     ]
-    ++ lib.optionals (pillow.edition == "workstation") (
-      with (lib.findModules ./units/virtualization);
-      [
-        container
-        virtual
-      ]
-    )
     ++ lib.optionals (pillow.hasGUI) [
       firefox
       hyprland

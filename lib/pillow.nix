@@ -61,6 +61,13 @@ in
     let
       system = pillow.hostPlatform;
       pkgs-unfree = mk-pkgs-unfree system;
+      pillow-default = pillow // {
+        settings = {
+          virtualisation.enable = null;
+          containers.docker.enable = null;
+          containers.podman.enable = null;
+        };
+      };
     in
     lib.nixosSystem {
       modules = modules ++ [
@@ -81,11 +88,11 @@ in
 
       specialArgs = specialArgs // {
         inherit
-          pillow
           inputs
           version
           pkgs-unfree
           ;
+        pillow = pillow-default;
       };
     };
 
