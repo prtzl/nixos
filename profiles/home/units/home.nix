@@ -30,7 +30,8 @@
     in
     with pkgs;
     [
-      dysk
+      duf # modern df with colors :D
+      dysk # disk usage
       ffmpeg-full # yes
     ]
     ++ lib.optionals (pillow.hasGUI) [
@@ -57,8 +58,5 @@
       thunar
       thunar-archive-plugin
       tumbler
-    ]
-    ++ lib.optionals pillow.onHardware [
-      monitorets # GUI for temperature sensors
     ];
 }
