@@ -67,7 +67,6 @@ in
   services.hardware.openrgb.motherboard = "amd";
   services.openssh = {
     enable = true;
-    ports = [ 8022 ];
   };
 
   services.jlink.enable = true;
