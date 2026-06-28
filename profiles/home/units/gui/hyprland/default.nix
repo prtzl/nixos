@@ -46,11 +46,11 @@
   };
 
   # Background setting app
-  systemd.user.services.hyprpaper.Unit.After = lib.mkForce "hyprland-session.target";
   services.hyprpaper = {
     enable = true;
     package = pkgs.hyprpaper;
     settings = { };
+    systemdTarget = "hyprland-session.target";
   };
   # INFO: exporter does not put monitor at the top, so hyprpaper complains
   home.file.".config/hypr/hyprpaper.conf".text = ''
