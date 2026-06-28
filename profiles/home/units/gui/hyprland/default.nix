@@ -171,13 +171,14 @@
     systemdTarget = "hyprland-session.target";
     settings = {
       general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
         after_sleep_cmd = "wlopm --on '*'";
-        before_sleep_cmd = "pidof hyprlock || hyprlock";
       };
       listener = [
         # Dim monitor after 30s
         {
-          timeout = 30;
+          timeout = 60;
           on-resume = "brightnessctl -r";
           on-timeout = "brightnessctl -s set 10";
         }
@@ -186,13 +187,21 @@
           timeout = 5;
           on-resume = "brightnessctl -rd tpacpi::kbd_backlight";
           on-timeout = "brightnessctl -sd tpacpi::kbd_backlight set 0";
+          ignore_inhibit = true; # backlight powers off no matter what
         }
         # disables screen after 1min
         {
-          timeout = 60;
+          timeout = 120;
           on-resume = "wlopm --on '*'";
           on-timeout = "wlopm --off '*'";
         }
+        # locks PC after X minuts
+        # for now I want all my machines just on all the time
+        # {
+        #   timeout = 120;
+        #   on-resume = "wlopm --on '*'";
+        #   on-timeout = "wlopm --off '*'";
+        # }
       ];
     };
   };
