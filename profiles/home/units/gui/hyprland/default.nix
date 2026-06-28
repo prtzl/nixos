@@ -189,7 +189,7 @@
           on-timeout = "brightnessctl -sd tpacpi::kbd_backlight set 0";
           ignore_inhibit = true; # backlight powers off no matter what
         }
-        # disables screen after 1min
+        # disables screen after 2min
         {
           timeout = 120;
           on-resume = "wlopm --on '*'";
