@@ -49,7 +49,7 @@
     },
     "pulseaudio": {
         "format": "{icon} {volume:3}%",
-        "format-bluetooth": "󰂯 {volume:3}%",
+        "format-bluetooth": "{volume:3}%",
         "format-muted": " MUTE ",
         "format-icons": {
             "headphones": "",
