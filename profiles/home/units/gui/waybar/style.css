@@ -2,11 +2,11 @@
     font-family: FiraCode Nerd Font;
     font-size: 1.3rem;
     font-weight: bold;
+    min-height: 0;
 }
 
 window#waybar {
     background-color: rgba(26, 26, 26, 0.8);
-    border-radius: 0 0 0.5rem 0.5rem;;
 }
 
 /* Should include global settings for ALL widgets, so only excluding the bar itself (configured a few lines up) */
@@ -23,8 +23,7 @@ window#waybar {
 #workspaces {
     border-radius: 1rem;
     color: #fdf6e3;
-    margin: 0 0.3rem;
-    padding: 0 0.5rem;
+    padding: 0 0.4rem;
 }
 
 #tray {
