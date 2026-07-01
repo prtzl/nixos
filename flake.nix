@@ -10,8 +10,8 @@
     };
 
     home-manager = {
-      # url = "github:nix-community/home-manager";
-      url = "github:prtzl/home-manager/master";
+      url = "github:nix-community/home-manager";
+      # url = "github:prtzl/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -33,7 +33,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.55.2";
+      url = "github:hyprwm/Hyprland/v0.55.4";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
