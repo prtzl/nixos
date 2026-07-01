@@ -65,9 +65,10 @@
 
       hostname = {
         disabled = false;
-        format = "[@$hostname $ssh_symbol]($style)";
-        ssh_only = true;
+        format = "[@$hostname]($style) [$ssh_symbol](bold purple)";
         style = "bold green";
+        ssh_only = true;
+        ssh_symbol = "󱘖 ";
       };
 
       nix_shell = {
