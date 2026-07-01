@@ -178,7 +178,7 @@
       listener = [
         # Dim monitor after 30s
         {
-          timeout = 60;
+          timeout = 120;
           on-resume = "brightnessctl -r";
           on-timeout = "brightnessctl -s set 10";
         }
@@ -191,7 +191,7 @@
         }
         # disables screen after 2min
         {
-          timeout = 120;
+          timeout = 600;
           on-resume = "wlopm --on '*'";
           on-timeout = "wlopm --off '*'";
         }
