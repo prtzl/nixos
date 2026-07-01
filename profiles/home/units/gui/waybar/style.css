@@ -27,7 +27,9 @@ window#waybar {
 }
 
 #tray {
-    padding: 0 0.5rem;
+    padding: 0 0.2rem;
+    margin: 0 0.5rem;
+    border: 0.1rem solid white;
 }
 #tray > .passive {
     -gtk-icon-effect: dim;
