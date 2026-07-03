@@ -21,7 +21,6 @@ window#waybar {
 #temperature,
 #tray,
 #workspaces {
-    border-radius: 1rem;
     color: #fdf6e3;
     padding: 0 0.4rem;
 }
@@ -30,6 +29,7 @@ window#waybar {
     padding: 0 0.2rem;
     margin: 0 0.5rem;
     border: 0.1rem solid white;
+    border-radius: 0.2rem;
 }
 #tray > .passive {
     -gtk-icon-effect: dim;
@@ -47,10 +47,10 @@ window#waybar {
     color: @content_inactive;
     transition: none;
     margin: 0 0.1rem;
+    border-radius: 0.2rem;
 }
 #workspaces button.active {
     color: #1a1a1a;
-    border-radius: 0.8rem;
     background: white;
     transition: none;
 }
