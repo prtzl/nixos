@@ -5,9 +5,7 @@
 }:
 
 let
-  assertion =
-    item: (((item) != null) && item) || (((item) == null) && (pillow.edition == "workstation"));
-  enableVirtualisation = assertion pillow.settings.virtualisation.enable;
+  enableVirtualisation = pillow.settings.virtualisation.enable ? false;
 in
 {
   imports = [ ./container.nix ];
