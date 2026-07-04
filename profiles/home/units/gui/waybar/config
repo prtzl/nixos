@@ -58,7 +58,7 @@
                 ""
             ]
         },
-        "scroll-step": 2,
+        "scroll-step": 5,
         "on-click": "pavucontrol"
     },
     "cpu": {
