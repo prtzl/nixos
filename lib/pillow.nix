@@ -7,7 +7,7 @@
 let
   overlays = [
     inputs.waybar.overlays.waybar
-    inputs.hyprland.overlays.hyprland-packages
+    # inputs.hyprland.overlays.hyprland-packages
     (self: super: {
       waybar = super.waybar.overrideAttrs (old: {
         doCheck = false;
