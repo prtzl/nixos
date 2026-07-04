@@ -4,11 +4,12 @@
   ...
 }:
 
+assert pillow.settings.containers.podman.enable;
+assert pillow.settings.virtualisation.enable;
+
 let
-  assertion =
-    item: (((item) != null) && item) || (((item) == null) && (pillow.edition == "workstation"));
-  enablePodman = assertion pillow.settings.containers.podman.enable;
-  enableDocker = assertion pillow.settings.containers.docker.enable;
+  enablePodman = pillow.settings.containers.podman.enable;
+  enableDocker = pillow.settings.containers.docker.enable;
   enableContainer = enableDocker || enablePodman;
 in
 {

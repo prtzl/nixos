@@ -61,11 +61,12 @@ in
     let
       system = pillow.hostPlatform;
       pkgs-unfree = mk-pkgs-unfree system;
+      ws = pillow.edition == "workstation"; # enable virtualization for all workstations by default
       pillow-default = pillow // {
         settings = {
-          virtualisation.enable = null;
-          containers.docker.enable = null;
-          containers.podman.enable = null;
+          virtualisation.enable = ws;
+          containers.docker.enable = ws;
+          containers.podman.enable = ws;
         };
       };
     in

@@ -5,7 +5,7 @@
 }:
 
 let
-  enableVirtualisation = pillow.settings.virtualisation.enable ? false;
+  enableVirtualisation = pillow.settings.virtualisation.enable;
 in
 {
   imports = [ ./container.nix ];
