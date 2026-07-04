@@ -4,9 +4,6 @@
   ...
 }:
 
-assert pillow.settings.containers.podman.enable;
-assert pillow.settings.virtualisation.enable;
-
 let
   enablePodman = pillow.settings.containers.podman.enable;
   enableDocker = pillow.settings.containers.docker.enable;
