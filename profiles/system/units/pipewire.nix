@@ -6,7 +6,12 @@
 }:
 
 {
-  environment.systemPackages = with pkgs; lib.optionals (pillow.hasGUI) [ qpwgraph ];
+  environment.systemPackages =
+    with pkgs;
+    lib.optionals (pillow.hasGUI) [
+      jamesdsp
+      qpwgraph
+    ];
 
   security.rtkit.enable = true;
   services.pipewire = {
