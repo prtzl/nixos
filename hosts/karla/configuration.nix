@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -94,4 +95,8 @@
     algorithm = "lz4";
     memoryPercent = 50;
   };
+
+  environment.systemPackages = with pkgs; [
+    tauon
+  ];
 }

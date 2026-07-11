@@ -62,13 +62,14 @@ in
       system = pillow.hostPlatform;
       pkgs-unfree = mk-pkgs-unfree system;
       ws = pillow.edition == "workstation"; # enable virtualization for all workstations by default
-      pillow-default = pillow // {
+      pillow-default = {
         settings = {
           virtualisation.enable = ws;
           containers.docker.enable = ws;
           containers.podman.enable = ws;
         };
-      };
+      }
+      // pillow;
     in
     lib.nixosSystem {
       modules = modules ++ [
