@@ -23,7 +23,7 @@ in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
-    # inputs.nixos-hardware.nixosModules.common-gpu-intel # adding intel-media-driver manually from unstable (xe!)
+    inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-pc
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ]
@@ -47,37 +47,39 @@ in
       package32 = pkgs.pkgsi686Linux.mesa;
     };
     graphics.extraPackages = with pkgs; [
-      intel-media-driver
-      intel-vaapi-driver
-      mesa
-      vpl-gpu-rt
-      vulkan-loader
       vulkan-validation-layers
     ];
+  };
+
+  services = {
+    hardware = {
+      openrgb = {
+        enable = true;
+        motherboard = "amd";
+      };
+    };
+    openssh.enable = true;
+    jlink.enable = true;
   };
 
   zramSwap = {
     enable = true;
     priority = 100;
-    algorithm = "lz4";
-    memoryPercent = 50;
+    algorithm = "zstd";
+    memoryPercent = 25;
   };
-
-  services.hardware.openrgb.enable = true;
-  services.hardware.openrgb.motherboard = "amd";
-  services.openssh = {
-    enable = true;
-  };
-
-  services.jlink.enable = true;
 
   programs = {
     obs-studio.enable = true;
-    wireshark.enable = true;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
   };
 
   environment.systemPackages = with pkgs; [
     arduino
+    nvtopPackages.intel
     rsync
     tauon
   ];
