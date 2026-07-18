@@ -36,12 +36,14 @@ in
       settings ? { },
     }:
     assert edition == "workstation" || edition == "virtual" || edition == "wsl";
+    let
+      ws = edition == "workstation"; # enable virtualization for all workstations by default
+    in
     {
       inherit
         edition
         hasGUI
         hostPlatform
-        settings
         useDefaults
         ;
       # my attempt at forcing user to declare necessary host fields
@@ -50,6 +52,12 @@ in
         interfaces = host.interfaces;
       };
       onHardware = (edition == "workstation" || edition == "virtual");
+      settings = {
+        virtualisation.enable = ws;
+        containers.docker.enable = ws;
+        containers.podman.enable = ws;
+      }
+      // settings;
     };
 
   pillowSystem =
@@ -61,15 +69,6 @@ in
     let
       system = pillow.hostPlatform;
       pkgs-unfree = mk-pkgs-unfree system;
-      ws = pillow.edition == "workstation"; # enable virtualization for all workstations by default
-      pillow-default = {
-        settings = {
-          virtualisation.enable = ws;
-          containers.docker.enable = ws;
-          containers.podman.enable = ws;
-        };
-      }
-      // pillow;
     in
     lib.nixosSystem {
       modules = modules ++ [
@@ -91,10 +90,10 @@ in
       specialArgs = specialArgs // {
         inherit
           inputs
-          version
+          pillow
           pkgs-unfree
+          version
           ;
-        pillow = pillow-default;
       };
     };
 
