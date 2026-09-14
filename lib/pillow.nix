@@ -34,6 +34,7 @@ in
       useDefaults ? true,
       hasGUI ? (edition == "workstation" || edition == "virtual"),
       settings ? { },
+      homeModules ? { },
     }:
     assert edition == "workstation" || edition == "virtual" || edition == "wsl";
     let
@@ -43,6 +44,7 @@ in
       inherit
         edition
         hasGUI
+        homeModules
         hostPlatform
         useDefaults
         ;
@@ -112,10 +114,13 @@ in
     { config, lib, ... }:
     let
       pkgs-unfree = mk-pkgs-unfree pillow.hostPlatform;
-      homeImports = imports ++ [
-        # inputs.hyprland.homeManagerModules.default
-        inputs.nvimnix.homeManagerModules.default
-      ];
+      homeImports =
+        imports
+        ++ [
+          # inputs.hyprland.homeManagerModules.default
+          inputs.nvimnix.homeManagerModules.default
+        ]
+        ++ pillow.homeModules;
 
       groupMapping = import ../lib/groupMapping.nix { inherit config lib; };
 

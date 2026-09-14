@@ -9,6 +9,15 @@ lib.pillowSystem rec {
     hostPlatform = "x86_64-linux";
     hasGUI = true;
 
+    homeModules = [
+      (
+        { pkgs, ... }:
+        {
+          services.hypridle.enable = false;
+        }
+      )
+    ];
+
     host = {
       name = "poli";
       interfaces = [ "enp13s0" ];
