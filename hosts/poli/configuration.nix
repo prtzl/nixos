@@ -25,7 +25,7 @@ in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-gpu-intel
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ]
@@ -72,7 +72,10 @@ in
   };
 
   programs = {
-    obs-studio.enable = true;
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [ obs-vaapi ];
+    };
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
@@ -84,7 +87,7 @@ in
     with xilinx;
     [
       arduino
-      nvtopPackages.intel
+      nvtopPackages.amd
       rsync
       tauon
 
