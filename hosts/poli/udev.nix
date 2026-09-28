@@ -51,7 +51,7 @@ in
         ACTION=="add", SUBSYSTEM=="hwmon", KERNEL=="hwmon*", ATTRS{name}=="nct6799", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp1_input /dev/motherboard_temp'"
 
         # Create GPU core temp aliases with use of vid and pid of the card/interface
-        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x8086", ATTRS{device}=="0xe2f0", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp2_input /dev/gpu_temp'"
+        ACTION=="add", SUBSYSTEM=="hwmon", ATTRS{vendor}=="0x1002", ATTRS{device}=="0x7550", RUN+="/bin/sh -c 'ln -s /sys$devpath/temp2_input /dev/gpu_temp'"
 
         # Create "/dev" entries for Digilent device's with read and write
         # permission granted to all users.

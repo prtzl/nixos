@@ -51,6 +51,7 @@ in
     graphics.extraPackages = with pkgs; [
       vulkan-validation-layers
     ];
+    amdgpu.overdrive.enable = true;
   };
 
   services = {
@@ -62,6 +63,10 @@ in
     };
     openssh.enable = true;
     jlink.enable = true;
+    lact = {
+      enable = true;
+      # settings = { };
+    };
   };
 
   zramSwap = {
