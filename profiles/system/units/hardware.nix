@@ -20,9 +20,9 @@
   hardware = {
     logitech.wireless = {
       enable = true;
-      enableGraphical = true;
     };
   };
+  programs.solaar.enable = true; # replacement for hardware.logitech.wireless.enableGraphical
 
   systemd.network.wait-online.extraArgs = map (
     interface: "--interface=${interface}"
