@@ -124,6 +124,13 @@ local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + SHIFT + q", hl.dsp.window.close())
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + SHIFT + Return", hl.dsp.exec_cmd(terminal, {
+  float = true,
+  move = {
+    "cursor_x - (window_w * 0.5)",
+    "cursor_y - (window_h * 0.5)"
+  }
+}))
 hl.bind(mainMod .. " + b", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + c", hl.dsp.exec_cmd(calculator))
 hl.bind(mainMod .. " + l", hl.dsp.exec_cmd(menu))
