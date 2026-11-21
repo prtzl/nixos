@@ -34,7 +34,7 @@ in
       useDefaults ? true,
       hasGUI ? (edition == "workstation" || edition == "virtual"),
       settings ? { },
-      homeModules ? { },
+      homeModules ? [ ],
     }:
     assert edition == "workstation" || edition == "virtual" || edition == "wsl";
     let
