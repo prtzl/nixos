@@ -15,6 +15,7 @@
     blueman.enable = true;
     hardware.bolt.enable = true;
     throttled.enable = true;
+    upower.enable = true;
     openssh.enable = true;
     tlp = {
       enable = true;
